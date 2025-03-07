@@ -2,6 +2,7 @@
 
 namespace Controllers;
 
+use Model\Speaker;
 use MVC\Router;
 
 class SpeakersController
@@ -22,7 +23,14 @@ class SpeakersController
     }
     public static function create(Router $router)
     {
-        $alerts = [];
+        if ($_SERVER["REQUEST_METHOD"] === "POST") {
+            $speaker = new Speaker($_POST);
+
+            $alerts = $speaker->validate();
+            if (empty($alerts)) {
+            }
+        }
+        $alerts = Speaker::gAlerts();
         $router->render("admin/speakers/create", [
             "title" => "Registrar ponente",
             "alerts" => $alerts

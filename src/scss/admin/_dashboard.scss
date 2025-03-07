@@ -31,11 +31,11 @@
     &__grid{
         display: flex;
         flex: 1;
+        overflow-y: hidden;
     }
     &__sidebar{
         background: v.$dark-gray;
         max-width: 12rem;
-        overflow: hidden;
     }
     &__menu{
         display: flex;
@@ -69,6 +69,7 @@
         background: lightgray;
         padding: 1rem 1rem 3rem 1rem;
         width: 100%;
+        overflow: auto;
         @include m.tablet{
             padding: 1rem 5rem 3rem 5rem;
         }
@@ -96,7 +97,6 @@
         padding: 2rem;
         border-radius: 1rem;
     }
-
     &__form{
         @extend .dashboard__container;
         @include m.md-container;

@@ -40,13 +40,18 @@ $router->post("/confirm", [AuthController::class, "confirm"]);
 // Admin Dashboard
 $router->get("/admin/dashboard", [DashboardController::class, "index"]);
 $router->post("/admin/dashboard", [DashboardController::class, "logout"]);
+
 // Speakers
 $router->get("/admin/speakers", [SpeakersController::class, "index"]);
 $router->get("/admin/speakers/create", [SpeakersController::class, "create"]);
+$router->post("/admin/speakers/create", [SpeakersController::class, "create"]);
+
 // Events
 $router->get("/admin/events", [EventsController::class, "index"]);
+
 // Registered users
 $router->get("/admin/registered", [RegisteredController::class, "index"]);
+
 // Gifts
 $router->get("/admin/gifts", [GiftsController::class, "index"]);
 

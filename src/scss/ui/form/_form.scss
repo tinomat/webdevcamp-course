@@ -67,6 +67,10 @@
             }
         }
     }
+    &__lists{
+        @include m.tags;
+        
+    }
     &__submit{
         @include m.button(v.$blue,v.$white);
         width: auto;

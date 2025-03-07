@@ -625,6 +625,23 @@ h3 {
 .form__input--socials:focus {
   scale: 1;
 }
+.form__lists {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+.form__lists > li {
+  background: #007df4;
+  padding: 1rem;
+  border-radius: 1rem;
+  font-size: 1.4rem;
+  color: #FFFFFF;
+  font-weight: 700;
+}
 .form__submit {
   background: #007df4;
   padding: 1.5rem 3rem;
@@ -783,11 +800,11 @@ h3 {
 .dashboard__grid {
   display: flex;
   flex: 1;
+  overflow-y: hidden;
 }
 .dashboard__sidebar {
   background: #1E293B;
   max-width: 12rem;
-  overflow: hidden;
 }
 .dashboard__menu {
   display: flex;
@@ -820,6 +837,7 @@ h3 {
   background: lightgray;
   padding: 1rem 1rem 3rem 1rem;
   width: 100%;
+  overflow: auto;
 }
 @media (min-width: 768px) {
   .dashboard__content {
