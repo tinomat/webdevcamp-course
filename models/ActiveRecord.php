@@ -150,12 +150,13 @@ class ActiveRecord
     }
 
     // Get all logs in current table
-    public static function all($order = "DESC")
+    public static function all($order = "ASC")
     {
         $query = "SELECT * FROM " . static::$table . " ORDER BY id {$order}";
         $res = self::querySQL($query);
         return $res;
     }
+
 
     // Find a log by his id
     public static function find($id)
@@ -176,11 +177,29 @@ class ActiveRecord
         return $res;
     }
 
+    // Pagination logs
+    public static function paginate($per_page, $offset)
+    {
+        // Traemos x cantidad de registros a partir del numero que indiquemos - Offset lo que hace es que si le pasamos un 10, va a omitir los primeros 10 registros y se va a traer los siguientes
+        $query = "SELECT * FROM " . static::$table . " ORDER BY id DESC LIMIT {$per_page} OFFSET {$offset}";
+        $res = self::querySQL($query);
+        return $res;
+    }
+
     // Find logs by column and value
     public static function where($column, $value)
     {
         $query = "SELECT * FROM " . static::$table . " WHERE {$column} = '{$value}'";
         $res = self::querySQL($query);
+        return array_shift($res);
+    }
+
+    // Get x amount of logs
+    public static function numLogs()
+    {
+        $query = "SELECT COUNT(*) FROM " . static::$table;
+        $res = self::$db->query($query);
+        $res = $res->fetch_assoc();
         return array_shift($res);
     }
 

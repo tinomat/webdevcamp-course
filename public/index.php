@@ -44,10 +44,14 @@ $router->post("/admin/dashboard", [DashboardController::class, "logout"]);
 // Speakers
 $router->get("/admin/speakers", [SpeakersController::class, "index"]);
 $router->post("/admin/speakers", [SpeakersController::class, "logout"]);
+
 $router->get("/admin/speakers/create", [SpeakersController::class, "create"]);
 $router->post("/admin/speakers/create", [SpeakersController::class, "create"]);
+
+
 $router->get("/admin/speakers/edit", [SpeakersController::class, "edit"]);
 $router->post("/admin/speakers/edit", [SpeakersController::class, "edit"]);
+
 $router->post("/admin/speakers/delete", [SpeakersController::class, "delete"]);
 
 // Events

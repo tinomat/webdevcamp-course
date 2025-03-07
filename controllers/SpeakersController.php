@@ -2,6 +2,7 @@
 
 namespace Controllers;
 
+use Classes\Pagination;
 use MVC\Router;
 use Model\Speaker;
 // Importacion correcta para manejar las imagenes
@@ -15,10 +16,35 @@ class SpeakersController
         if (!isAdmin()) {
             header("Location: /login");
         }
-        $speakers = Speaker::all("ASC");
+
+        // Obtener pagina actual
+        $current_page = s($_GET["page"]);
+
+        // Validamos que sea un entero
+        $current_page = filter_var($current_page, FILTER_VALIDATE_INT);
+
+        // Si la pagina no es un entero o es menor a 1
+        if (!$current_page || $current_page < 1) {
+            header("Location: /admin/speakers?page=1");
+        }
+
+        // Paginacion - Calculo de paginas totales, Registros por pagina - Instancia de paginacion
+        $total_pages = Speaker::numLogs();
+        $logs_per_page = 10;
+        $pagination = new Pagination($current_page, $logs_per_page, $total_pages);
+
+        // Si la pagina actual es mayor al total de paginas
+        if ($current_page > $pagination->total_pages()) {
+            header("Location: /admin/speakers?page=1");
+        }
+
+        // Obtenemos la cantidad de registros necesarias por pagina
+        $speakers = Speaker::paginate($logs_per_page, $pagination->offset());
+
         $router->render('admin/speakers/index', [
             'title' => 'Ponentes / Conferencistas',
-            "speakers" => $speakers
+            "speakers" => $speakers,
+            "pagination" => $pagination->pagination()
         ]);
     }
     public static function logout()
@@ -36,9 +62,6 @@ class SpeakersController
         }
         $speaker = new Speaker;
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
-            if (!isAdmin()) {
-                header("Location: /login");
-            }
             // Leer imagen - importante tener enctype/form-data en el form para que esto funcione
             if (!empty($_FILES["image"]["tmp_name"])) {
                 $images_fold = "../public/img/speakers";

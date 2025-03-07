@@ -10,6 +10,9 @@ class AuthController
 {
     public static function login(Router $router)
     {
+        // En caso de que ya este logeado
+        isLogin();
+
         // Si se registra un metodo post en la url
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
             // Instanciamos un objeto user con los argumentos pasados en el formulario de logeo
@@ -73,6 +76,7 @@ class AuthController
 
     public static function register(Router $router)
     {
+        isLogin();
         $user = new User;
 
         if ($_SERVER["REQUEST_METHOD"] === "POST") {

@@ -55,7 +55,7 @@
     width: min(95%, 60rem);
     margin: 0 auto;
 }
-@mixin fluid-text($max,$min){
+@mixin fluid-text($min,$max){
     // valor minimo, calculo ideal, valor maximo
     font-size: clamp($min, -0.8rem + 10vw, $max);
 }

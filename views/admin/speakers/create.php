@@ -10,7 +10,7 @@
 <div class="dashboard__form">
     <?php include_once __DIR__ . "/../../templates/alerts.php" ?>
     <!-- El enctype es porque vamos a subir archivos -->
-    <form method="POST" class="form" enctype="multipart/form-data">
+    <form method="POST" class="form" enctype="multipart/form-data" action="/admin/speakers/create">
         <?php include_once __DIR__ . "/form.php"; ?>
         <input type="submit" class="form__submit form__submit--register" value="Registrar ponente">
     </form>

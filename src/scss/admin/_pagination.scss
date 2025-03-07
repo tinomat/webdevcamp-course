@@ -1,0 +1,18 @@
+@use 'base/vars' as v;
+@use 'base/mixins' as m;
+
+.pagination{
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    &:has(:only-child){
+        justify-content: flex-end;
+        &:has(.pagination__link-prev){
+            justify-self:start;
+        }
+    }
+    &__link{
+        @include m.link(darken(v.$blue,30));
+        color: v.$blue;
+    }
+}
