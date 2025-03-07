@@ -1,0 +1,17 @@
+@use 'base/vars' as v;
+.actions{
+    margin-top: 3rem;
+    display: flex;
+    justify-content: space-between;
+    &__link{
+        font-size: 1.4rem;
+        font-weight: v.$light;
+        transition: .4s;
+        &:hover{
+            scale: 1.05;
+        }
+    }
+    &--center{
+        justify-content: center;
+    }
+}

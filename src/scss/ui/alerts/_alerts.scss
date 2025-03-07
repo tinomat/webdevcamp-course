@@ -1,0 +1,20 @@
+@use 'base/vars' as v;
+
+.alert{
+    padding: 1rem;
+    margin-block: .5rem;
+    font-weight: v.$bold;
+    font-size: 1.4rem;
+    border-radius: 1rem;
+    border-left: .5rem solid;
+    &--error{
+        background: lighten($color: v.$red, $amount: 60%);
+        border-color: v.$red;
+        color: v.$red;
+    }
+    &--success{
+        background: lighten($color: v.$green, $amount: 40%);
+        border-color: v.$green;
+        color: darken($color: v.$green, $amount: 20%);
+    }
+}

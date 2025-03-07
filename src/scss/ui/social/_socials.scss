@@ -1,0 +1,13 @@
+@use 'base/vars' as v;
+@use 'base/mixins' as m;
+
+.network-menu{
+    display: flex;
+    justify-content: center;
+    gap: 4rem;
+    margin-block: 4rem;
+    @include m.tablet{
+        justify-content: flex-end;
+    }
+    @include m.social-menu(v.$white, 2rem);
+}

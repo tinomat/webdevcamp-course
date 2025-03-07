@@ -1,0 +1,139 @@
+@use "vars" as v;
+
+// Media queries
+@mixin mobile{
+    @media (min-width:v.$mobile){
+        @content;
+    }
+};
+@mixin tablet{
+    @media (min-width: v.$tablet){
+        @content;
+    }
+};
+@mixin desktop{
+    @media (min-width: v.$desktop){
+        @content;
+    }
+};
+@mixin xl_desktop{
+    @media (min-width: v.$xl_desktop){
+        @content;
+    }
+};
+@mixin button($bgColor, $textColor){
+    background: $bgColor;
+    padding: 1.5rem 3rem;
+    color: $textColor;
+    font-size: 1.8rem;
+    font-weight: 700;
+    border: none;
+    transition: .3s;
+    text-align: center;
+    width: 100%;
+    display: inline-block;
+    &:hover{
+        background: darken($color: $bgColor, $amount: 15%);
+        cursor: pointer;
+        scale: 1.02;
+    }
+};
+@mixin grid($columns,$gap){
+    display: grid;
+    gap: $gap;
+    grid-template-columns: repeat($columns,1fr);
+} 
+@mixin container{
+    width: min(95%, 120rem);
+    margin: 0 auto;
+}
+@mixin md-container{
+    width: min(95%, 80rem);
+    margin: 0 auto;
+}
+@mixin sm-container{
+    width: min(95%, 60rem);
+    margin: 0 auto;
+}
+@mixin fluid-text($max,$min){
+    // valor minimo, calculo ideal, valor maximo
+    font-size: clamp($min, -0.8rem + 10vw, $max);
+}
+@mixin gradient-texto($direction, $c1, $c2){
+    background: linear-gradient(to $direction, $c1, $c2);
+    background-clip: text;
+    color: transparent;
+}
+@mixin link($cHover){ 
+    color: v.$white;
+    font-size: 1.4rem;
+    font-weight: v.$bold;
+    transition: .4s;
+    background: transparent;
+    border: none;
+    &:hover{
+        scale: 1.05;
+        color: $cHover;
+        cursor: pointer;
+    }
+}
+@mixin logo{
+    color: v.$white;
+    text-align: center;
+    margin-bottom: 2rem;
+    @include desktop{
+        text-align: left;
+        margin: 0;
+    }
+}
+@mixin social-menu($color,$size){
+    &__link{
+        transition: .3s;
+        &::before{
+            color: $color;
+            font-size: $size;
+            display: inline-block;
+            font-style: normal;
+            // Aplica a los vectores - utiliza la informacion del vector para mostrar
+            text-rendering: auto;
+            // Fuente correcta para vectores
+            -webkit-font-smoothing: antialiased;
+            font-family: "Font Awesome 6 Brands";
+        }
+        &:hover{
+            scale: 1.05;
+        }
+        &[href*='https://instagram.com']::before{
+            // Content tiene el id del icono de font-awesome
+            content: '\f16d';
+        }
+        &[href*='https://twitter.com']::before{
+            content: '\f099';
+        }
+        &[href*='https://youtube.com']::before{
+            content: '\f167';
+        }
+        &[href*='https://tiktok.com']::before{
+            content: '\e07b';
+        }
+        &[href*='https://github.com']::before{
+            content: '\f09b';
+        }
+    }
+    &__hidden{
+        display: none;
+    }
+}
+@mixin headings{
+    font-family: v.$primary_font;
+    font-weight: v.$extraBold;
+    margin: 2rem 0;
+}
+@mixin page-name{
+    @include headings;
+    margin: 6rem 0 3rem 0;
+    text-align: center;
+}
+@mixin box-shadow{
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}

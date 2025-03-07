@@ -1,0 +1,21 @@
+@use 'base/vars' as v;
+@use 'base/mixins' as m;
+
+.bar{
+    background: v.$blue;
+    &__content{
+        @include m.container;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        overflow: hidden;
+        @include m.desktop{
+            justify-content: space-between;
+            flex-direction: row;
+        }
+    }
+    &__logo{
+        @include m.logo;
+        @include m.fluid-text(2rem,3rem);
+    }
+}

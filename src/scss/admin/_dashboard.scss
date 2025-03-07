@@ -1,0 +1,104 @@
+@use 'base/vars' as v;
+@use 'base/mixins' as m;
+
+.dashboard{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: v.$light-gray;
+    &__header{
+        background: v.$dark-gray;
+        padding: 2rem;
+        &-grid{
+            display: flex;
+            flex-direction: column;
+            @include m.tablet{
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }            
+        }
+    }
+    &__logo{
+        @include m.logo;
+        @include m.fluid-text(2rem,3rem);
+    }
+    &__submit{
+        &--logout{
+            @include m.link(v.$blue);
+        }
+    }
+    &__grid{
+        display: flex;
+        flex: 1;
+    }
+    &__sidebar{
+        background: v.$dark-gray;
+        max-width: 12rem;
+        overflow: hidden;
+    }
+    &__menu{
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        padding: 1rem;
+    }
+    &__link{
+        color: lighten($color: v.$dark-gray, $amount: 40);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.7rem;
+        padding: 2rem;
+        transition: .3s;
+        &:hover,
+        &--current{
+            background: lighten($color: v.$dark-gray, $amount: 20);
+            color: v.$white;
+            scale: 1.02;
+            border-radius: 1rem;
+        }
+    }
+    &__icon{
+        font-size: 2rem;
+    }
+    &__menu-text{
+        font-size: 1.2rem;
+    }
+    &__content{
+        background: lightgray;
+        padding: 1rem 1rem 3rem 1rem;
+        width: 100%;
+        @include m.tablet{
+            padding: 1rem 5rem 3rem 5rem;
+        }
+    }
+    &__heading{
+        @include m.page-name;
+    }
+    &__container-button{
+        @include m.tablet{
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 5rem;
+        }
+    }
+    &__button{
+        @include m.button(v.$blue, v.$white);
+        font-size: 1.4rem;
+        @include m.tablet{
+            width: auto;
+        }
+    }
+    &__container{
+        @include m.box-shadow;
+        background: v.$white;
+        padding: 2rem;
+        border-radius: 1rem;
+    }
+
+    &__form{
+        @extend .dashboard__container;
+        @include m.md-container;
+    }
+}

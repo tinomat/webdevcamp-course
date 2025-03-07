@@ -1,0 +1,19 @@
+@use 'base/vars' as v;
+@use 'base/mixins' as m;
+
+.navegation{
+    display: flex;
+    flex-direction: column;
+    @include m.tablet{
+        flex-direction: row;
+    }
+
+    &__link{
+        @include m.link(v.$black);
+        padding: 2rem;
+        text-align: center;
+        &:hover{
+            background: v.$white;
+        }
+    }
+}

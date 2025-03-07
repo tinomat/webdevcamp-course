@@ -1,0 +1,1 @@
+<h2 class="dashboard__heading"><?= $title ?></h2>
