@@ -625,6 +625,10 @@ h3 {
 .form__input--socials:focus {
   scale: 1;
 }
+.form__input--textarea {
+  resize: none;
+  overflow: auto;
+}
 .form__text {
   margin-top: 3rem;
 }
@@ -919,6 +923,7 @@ h3 {
 .table__td--actions {
   display: flex;
   justify-content: flex-end;
+  flex-wrap: wrap;
   gap: 2rem;
   align-items: center;
 }
@@ -940,28 +945,53 @@ h3 {
 }
 
 .pagination {
+  margin-top: 1rem;
   display: flex;
-  justify-content: space-between;
+  justify-content: start;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
   padding: 1rem;
 }
-.pagination:has(:only-child) {
-  justify-content: flex-end;
-}
-.pagination:has(:only-child):has(.pagination__link-prev) {
-  justify-self: start;
+@media (min-width: 768px) {
+  .pagination {
+    justify-content: flex-end;
+  }
 }
 .pagination__link {
-  color: #FFFFFF;
-  font-size: 1.4rem;
-  font-weight: 700;
-  transition: 0.4s;
-  background: transparent;
-  border: none;
   color: #007df4;
+  font-size: 1.6rem;
+  transition: 0.3s;
 }
 .pagination__link:hover {
-  scale: 1.05;
-  color: rgb(0, 46.618852459, 91);
-  cursor: pointer;
+  scale: 1.02;
+}
+.pagination__link--text {
+  padding: 1rem;
+  border-radius: 1rem;
+  border: 1px solid #007df4;
+  transition: 0.3s;
+}
+.pagination__link--text:hover {
+  border-color: rgb(0, 46.618852459, 91);
+}
+.pagination__link--num {
+  font-weight: 700;
+}
+.pagination__link--current {
+  color: #64748B;
+  font-weight: 700;
+  user-select: none;
+}
+.pagination__link--current:hover {
+  scale: 1;
+}
+.pagination__link--current, .pagination__link--num {
+  display: none;
+}
+@media (min-width: 768px) {
+  .pagination__link--current, .pagination__link--num {
+    display: block;
+  }
 }
 /*# sourceMappingURL=app.css.map */

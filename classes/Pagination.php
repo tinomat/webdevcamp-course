@@ -62,6 +62,19 @@ class Pagination
         return $html;
     }
 
+    public function nums_page()
+    {
+        $html = "";
+        for ($i = 1; $i <= $this->total_pages(); $i++) {
+            if ($this->current_page == $i) {
+                $html .= "<span class=\"pagination__link pagination__link--current\">{$i}</span>";
+            } else {
+                $html .= "<a class=\"pagination__link pagination__link--num\" href=\"?page={$i}\">{$i}</a>";
+            }
+        }
+        return $html;
+    }
+
     public function pagination()
     {
         $html = "";
@@ -69,6 +82,7 @@ class Pagination
         if ($this->total_logs > 1) {
             $html .= "<div class = 'pagination'>";
             $html .= $this->prev_link();
+            $html .= $this->nums_page();
             $html .= $this->next_link();
             $html .= "</div>";
         }

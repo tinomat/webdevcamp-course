@@ -5,15 +5,12 @@
                 &#60;WebDevCamp/>
             </h2>
         </a>
-        <?php
-        if (!current_page("/edit") && !current_page("/create")) { ?>
-            <nav class="dashboard__nav">
-                <form class="dashboard__form-logout" method="POST">
-                    <input type="submit"
-                        value="Cerrar sesion"
-                        class="dashboard__submit dashboard__submit--logout" />
-                </form>
-            </nav>
-        <?php } ?>
+        <nav class="dashboard__nav">
+            <form class="dashboard__form-logout" method="POST" action="/logout">
+                <input type="submit"
+                    value="Cerrar sesion"
+                    class="dashboard__submit dashboard__submit--logout" />
+            </form>
+        </nav>
     </div>
 </header>

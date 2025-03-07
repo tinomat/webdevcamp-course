@@ -2,17 +2,49 @@
 @use 'base/mixins' as m;
 
 .pagination{
+    margin-top: 1rem;
     display: flex;
-    justify-content: space-between;
+    justify-content: start;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
     padding: 1rem;
-    &:has(:only-child){
+    @include m.tablet{
         justify-content: flex-end;
-        &:has(.pagination__link-prev){
-            justify-self:start;
-        }
     }
     &__link{
-        @include m.link(darken(v.$blue,30));
         color: v.$blue;
+        font-size: 1.6rem;
+        transition: .3s;
+        &:hover{
+            scale: 1.02;
+        }
+        &--text{
+            padding: 1rem;
+            border-radius: 1rem;
+            border: 1px solid v.$blue;
+            transition: .3s;
+            &:hover{
+                border-color: darken($color: v.$blue, $amount: 30);
+            }
+        }
+        &--num{
+            font-weight: v.$bold;
+        }
+        &--current{
+            color: v.$gray;
+            font-weight: v.$bold;
+            user-select: none;
+            &:hover{
+                scale: 1;
+            }
+        }
+        &--current,
+        &--num{
+            display: none;
+            @include m.tablet{
+                display: block;
+            }
+        }
     }
 }

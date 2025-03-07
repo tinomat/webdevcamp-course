@@ -29,10 +29,12 @@ function isAdmin()
 function isLogin()
 {
     session_start();
-    if ($_SESSION["admin"]) {
-        header("Location: /admin/dashboard");
-    } else {
-        header("Location: /");
+    if (!empty($_SESSION)) {
+        if (!empty($_SESSION["admin"])) {
+            header("Location: /admin/dashboard");
+        } elseif (!empty($_SESSION["name"])) {
+            header("Location: /");
+        }
     }
 }
 

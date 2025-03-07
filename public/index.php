@@ -16,6 +16,7 @@ $router = new Router();
 // Login
 $router->get("/login", [AuthController::class, "login"]);
 $router->post("/login", [AuthController::class, "login"]);
+$router->post('/logout', [AuthController::class, 'logout']);
 
 // Create Acc
 $router->get("/register", [AuthController::class, "register"]);
@@ -39,11 +40,9 @@ $router->post("/confirm", [AuthController::class, "confirm"]);
 
 // Admin Dashboard
 $router->get("/admin/dashboard", [DashboardController::class, "index"]);
-$router->post("/admin/dashboard", [DashboardController::class, "logout"]);
 
 // Speakers
 $router->get("/admin/speakers", [SpeakersController::class, "index"]);
-$router->post("/admin/speakers", [SpeakersController::class, "logout"]);
 
 $router->get("/admin/speakers/create", [SpeakersController::class, "create"]);
 $router->post("/admin/speakers/create", [SpeakersController::class, "create"]);
@@ -56,15 +55,13 @@ $router->post("/admin/speakers/delete", [SpeakersController::class, "delete"]);
 
 // Events
 $router->get("/admin/events", [EventsController::class, "index"]);
-$router->post("/admin/events", [EventsController::class, "logout"]);
+$router->get("/admin/events/create", [EventsController::class, "create"]);
 
 // Registered users
 $router->get("/admin/registered", [RegisteredController::class, "index"]);
-$router->post("/admin/registered", [RegisteredController::class, "logout"]);
 
 
 // Gifts
 $router->get("/admin/gifts", [GiftsController::class, "index"]);
-$router->post("/admin/gifts", [GiftsController::class, "logout"]);
 
 $router->checkRoutes();

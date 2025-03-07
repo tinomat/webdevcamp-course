@@ -2,6 +2,7 @@
 
 namespace Controllers;
 
+use Model\Event;
 use MVC\Router;
 
 class EventsController
@@ -15,12 +16,14 @@ class EventsController
             'title' => 'Conferencias y Workshops'
         ]);
     }
-    public static function logout()
+    public static function create(Router $router)
     {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            session_start();
-            $_SESSION = [];
-            header('Location: /login');
-        }
+        $event = new Event;
+        $alerts = [];
+        $router->render("admin/events/create", [
+            "title" => "Crear un evento",
+            "alerts" => $alerts,
+            "event" => $event
+        ]);
     }
 }

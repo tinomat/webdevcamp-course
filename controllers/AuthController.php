@@ -10,8 +10,6 @@ class AuthController
 {
     public static function login(Router $router)
     {
-        // En caso de que ya este logeado
-        isLogin();
 
         // Si se registra un metodo post en la url
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -70,13 +68,12 @@ class AuthController
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
             session_start();
             $_SESSION = [];
-            header("Location: /");
+            header("Location: /login");
         }
     }
 
     public static function register(Router $router)
     {
-        isLogin();
         $user = new User;
 
         if ($_SERVER["REQUEST_METHOD"] === "POST") {

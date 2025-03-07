@@ -30,7 +30,7 @@ class SpeakersController
 
         // Paginacion - Calculo de paginas totales, Registros por pagina - Instancia de paginacion
         $total_pages = Speaker::numLogs();
-        $logs_per_page = 10;
+        $logs_per_page = 5;
         $pagination = new Pagination($current_page, $logs_per_page, $total_pages);
 
         // Si la pagina actual es mayor al total de paginas
@@ -46,14 +46,6 @@ class SpeakersController
             "speakers" => $speakers,
             "pagination" => $pagination->pagination()
         ]);
-    }
-    public static function logout()
-    {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            session_start();
-            $_SESSION = [];
-            header('Location: /login');
-        }
     }
     public static function create(Router $router)
     {
@@ -154,12 +146,15 @@ class SpeakersController
         $networks = json_decode($speaker->networks);
 
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
+
             if (!isAdmin()) {
                 header("Location: /login");
             }
-            $images_fold = "../public/img/speakers";
+
             // Leer imagen - importante tener enctype/form-data en el form para que esto funcione
             if (!empty($_FILES["image"]["tmp_name"])) {
+                $images_fold = "../public/img/speakers";
+
                 // Crear la carpeta si no existe
                 if (!is_dir($images_fold)) {
                     // Creamos la carpeta, pasamos la ruta, los permisos, y el true permite crear subdirectorios de forma recursiva
@@ -189,7 +184,7 @@ class SpeakersController
             // Volvemos a convertir en string las redes, para poder almacenarlas en la base de datos
             $_POST["networks"] = json_encode($_POST["networks"], JSON_UNESCAPED_SLASHES);
             $speaker->sync($_POST);
-
+            debug($speaker);
             $alerts = $speaker->validate();
 
             if (empty($alerts)) {
