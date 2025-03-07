@@ -11,6 +11,14 @@
             saveTag(e);
         });
 
+        // Recuperar tags del input hidden
+        // Si el input no está vacío
+        if (tagsInputHidden.value !== "") {
+            // Creamos array a partir del string, de los elementos separados por coma (,)
+            tags = tagsInputHidden.value.split(",");
+            showTags();
+        }
+
         function saveTag(e) {
             // keyCode nos retorna el codigo equivalente a la tecla presionada
             // si presiono una coma

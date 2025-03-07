@@ -39,7 +39,6 @@ class AuthController
                         $_SESSION["lastname"] = $user->lastname;
                         $_SESSION["email"] = $user->email;
                         $_SESSION["admin"] = $user->admin ?? null;
-                        $_SESSION["login"] = true;
 
                         if ($user->admin) {
                             header("Location: /admin/dashboard");

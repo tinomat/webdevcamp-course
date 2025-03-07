@@ -45,7 +45,21 @@
             class="form__input form__input--file"
             name="image">
     </div>
+    <?php
+    if (isset($speaker->current_image)) { ?>
+        <div class="form__text">Imagen:actual</div>
+        <div class="form__image">
+            <picture>
+                <!-- Cargamos formato webp en caso de que sea compatible -->
+                <source srcset="<?= $_ENV["HOST"] . "/img/speakers/" . $speaker->image; ?>.webp" type="image/webp">
+                <source srcset="<?= $_ENV["HOST"] . "/img/speakers/" . $speaker->image; ?>.png" type="image/png">
+                <img loading="lazy" src="<?= $_ENV["HOST"] . "/img/speakers/" . $speaker->image; ?>.png" alt="Imagen Ponente">
+            </picture>
+        </div>
+    <?php }
+    ?>
 </fieldset>
+
 <fieldset class="form__fieldset">
     <legend class="form__legend">
         Informacion Extra
@@ -60,6 +74,7 @@
     <div id="tags" class="form__lists"></div>
     <input type="hidden" name="tags" value="<?= $speaker->tags ?? "" ?>">
 </fieldset>
+
 <fieldset class="form__fieldset">
     <legend class="form__legend">
         Redes Sociales
@@ -73,7 +88,7 @@
                 placeholder="Facebook"
                 class="form__input form__input--socials"
                 name="networks[facebook]"
-                value="<?= $speaker->facebook ?? "" ?>">
+                value="<?= $networks->facebook ?? "" ?>">
         </div>
     </div>
     <div class="form__field">
@@ -85,7 +100,7 @@
                 placeholder="Instagram"
                 class="form__input form__input--socials"
                 name="networks[instagram]"
-                value="<?= $speaker->instagram ?? "" ?>">
+                value="<?= $networks->instagram ?? "" ?>">
         </div>
     </div>
     <div class="form__field">
@@ -97,7 +112,7 @@
                 placeholder="Twitter"
                 class="form__input form__input--socials"
                 name="networks[twitter]"
-                value="<?= $speaker->twitter ?? "" ?>">
+                value="<?= $networks->twitter ?? "" ?>">
         </div>
     </div>
     <div class="form__field">
@@ -109,7 +124,7 @@
                 placeholder="Youtube"
                 class="form__input form__input--socials"
                 name="networks[youtube]"
-                value="<?= $speaker->youtube ?? "" ?>">
+                value="<?= $networks->youtube ?? "" ?>">
         </div>
     </div>
     <div class="form__field">
@@ -121,7 +136,7 @@
                 placeholder="GitHub"
                 class="form__input form__input--socials"
                 name="networks[github]"
-                value="<?= $speaker->github ?? "" ?>">
+                value="<?= $networks->github ?? "" ?>">
         </div>
     </div>
     <div class="form__field">
@@ -133,7 +148,7 @@
                 placeholder="TikTok"
                 class="form__input form__input--socials"
                 name="networks[tiktok]"
-                value="<?= $speaker->tiktok ?? "" ?>">
+                value="<?= $networks->tiktok ?? "" ?>">
         </div>
     </div>
 </fieldset>

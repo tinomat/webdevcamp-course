@@ -8,7 +8,9 @@ class EventsController
 {
     public static function index(Router $router)
     {
-
+        if (!isAdmin()) {
+            header("Location: /login");
+        }
         $router->render('admin/events/index', [
             'title' => 'Conferencias y Workshops'
         ]);

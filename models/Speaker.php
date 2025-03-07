@@ -48,6 +48,7 @@ class Speaker extends ActiveRecord
         if (!$this->tags) {
             self::$alerts["error"][] = "Debes ingresar algunas areas";
         }
+
         return self::$alerts;
     }
 }

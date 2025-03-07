@@ -17,9 +17,13 @@ function s($html): string
 
 function isAuth()
 {
-    if (!$_SESSION["login"]) {
-        header("/");
-    }
+    session_start();
+    return isset($_SESSION["name"]) && !empty($_SESSION);
+}
+function isAdmin()
+{
+    session_start();
+    return isset($_SESSION["admin"]) && !empty($_SESSION["admin"]);
 }
 
 function current_page($path)

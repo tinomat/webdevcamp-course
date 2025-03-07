@@ -1,0 +1,47 @@
+@use 'base/vars' as v;
+@use 'base/mixins' as m;
+.table{
+    width: 100%;
+    // Eliminamos el borde en las tablas
+    border-collapse: collapse;
+    &__thead{
+        background: v.$dark-gray;
+        color: v.$white;
+    }
+    &__th{
+        padding: 1rem;
+        text-align: left;
+    }
+    &__tr{
+        // even = pares, odd = impares
+        &:nth-child(even){
+            background: v.$light-gray;
+        }
+    }
+    &__td{
+        padding: 1rem 1.5rem;
+        &--actions{
+            display: flex;
+            justify-content: flex-end;
+            gap: 2rem;
+            align-items: center;
+        }
+    }
+    &__action{
+        // Eliminamos propiedades por defecto
+        all: unset;
+        font-size: 1.4rem;
+        font-weight: v.$bold;
+        transition: .3s;
+        &:hover{
+            cursor: pointer;
+            scale: 1.02;
+        }
+        &--edit{
+            color: v.$blue;
+        }
+        &--delete{
+            color: v.$red;
+        }
+    }
+}

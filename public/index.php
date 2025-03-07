@@ -43,17 +43,24 @@ $router->post("/admin/dashboard", [DashboardController::class, "logout"]);
 
 // Speakers
 $router->get("/admin/speakers", [SpeakersController::class, "index"]);
+$router->post("/admin/speakers", [SpeakersController::class, "logout"]);
 $router->get("/admin/speakers/create", [SpeakersController::class, "create"]);
 $router->post("/admin/speakers/create", [SpeakersController::class, "create"]);
+$router->get("/admin/speakers/edit", [SpeakersController::class, "edit"]);
+$router->post("/admin/speakers/edit", [SpeakersController::class, "edit"]);
+$router->post("/admin/speakers/delete", [SpeakersController::class, "delete"]);
 
 // Events
 $router->get("/admin/events", [EventsController::class, "index"]);
+$router->post("/admin/events", [EventsController::class, "logout"]);
 
 // Registered users
 $router->get("/admin/registered", [RegisteredController::class, "index"]);
+$router->post("/admin/registered", [RegisteredController::class, "logout"]);
+
 
 // Gifts
 $router->get("/admin/gifts", [GiftsController::class, "index"]);
-
+$router->post("/admin/gifts", [GiftsController::class, "logout"]);
 
 $router->checkRoutes();
