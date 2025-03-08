@@ -47,7 +47,8 @@
         font-size: 1.8rem;
         color: rgba($color: v.$black, $alpha: .8);
     }
-    &__input{
+    &__input,
+    &__select{
         padding: 1rem;
         border: 1px solid darken($color: v.$light-gray, $amount: 20);
         border-radius: 1rem;
@@ -71,6 +72,11 @@
             overflow: auto;
         }
     }
+
+    &__radio{
+        display: flex;
+        gap: 3rem;
+    }
     &__text{
         margin-top: 3rem;
     }
@@ -79,7 +85,6 @@
     }
     &__lists{
         @include m.tags;
-        
     }
     &__submit{
         @include m.button(v.$blue,v.$white);

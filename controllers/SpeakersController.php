@@ -126,22 +126,23 @@ class SpeakersController
     }
     public static function edit(Router $router)
     {
-        if (!isAdmin()) {
-            header("Location: /login");
-        }
+
         $id = s($_GET["id"]);
         // Validamos que sea un entero
         $id = filter_var($id, FILTER_VALIDATE_INT);
+
         if (!$id) {
             header("Location: /admin/speakers");
         }
+
         $speaker = Speaker::find($id);
+
         if (!$speaker) {
             header("Location: /admin/speakers");
         }
+
         // Imagen temporal para mostrar a la hora de editar
         $speaker->current_image = $speaker->image;
-
         // Convertimos el string con las redes a un objeto
         $networks = json_decode($speaker->networks);
 
@@ -184,7 +185,6 @@ class SpeakersController
             // Volvemos a convertir en string las redes, para poder almacenarlas en la base de datos
             $_POST["networks"] = json_encode($_POST["networks"], JSON_UNESCAPED_SLASHES);
             $speaker->sync($_POST);
-            debug($speaker);
             $alerts = $speaker->validate();
 
             if (empty($alerts)) {

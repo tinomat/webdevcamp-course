@@ -3,7 +3,7 @@
         Informacion Personal
     </legend>
     <div class="form__field">
-        <label for="name" class="form_label">Nombre</label>
+        <label for="name" class="form__label">Nombre</label>
         <input type="text"
             id="name"
             placeholder="Nombre del ponente"
@@ -12,7 +12,7 @@
             value="<?= $speaker->name ?? "" ?>">
     </div>
     <div class="form__field">
-        <label for="lastname" class="form_label">Apellido</label>
+        <label for="lastname" class="form__label">Apellido</label>
         <input type="text"
             id="lastname"
             placeholder="Apelldio del ponente"
@@ -21,7 +21,7 @@
             value="<?= $speaker->lastname ?? "" ?>">
     </div>
     <div class="form__field">
-        <label for="city" class="form_label">Ciudad</label>
+        <label for="city" class="form__label">Ciudad</label>
         <input type="text"
             id="city"
             placeholder="Ciudad del ponente"
@@ -30,7 +30,7 @@
             value="<?= $speaker->city ?? "" ?>">
     </div>
     <div class="form__field">
-        <label for="country" class="form_label">Pais</label>
+        <label for="country" class="form__label">Pais</label>
         <input type="text"
             id="country"
             placeholder="Pais del ponente"
@@ -39,7 +39,7 @@
             value="<?= $speaker->country ?? "" ?>">
     </div>
     <div class="form__field">
-        <label for="image" class="form_label">Imagen</label>
+        <label for="image" class="form__label">Imagen</label>
         <input type="file"
             id="image"
             class="form__input form__input--file"
@@ -65,7 +65,7 @@
         Informacion Extra
     </legend>
     <div class="form__field">
-        <label for="tags_input" class="form_label">Areas de experiencia (separadas por coma)</label>
+        <label for="tags_input" class="form__label">Areas de experiencia (separadas por coma)</label>
         <input type="text"
             id="tags_input"
             placeholder="Ej. Node.js, PHP, Laravel, JS, UI/UX"

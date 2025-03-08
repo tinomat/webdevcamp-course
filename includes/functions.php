@@ -1,6 +1,5 @@
 <?php
 
-
 function debug($var): string
 {
     echo "<pre>";
@@ -24,18 +23,6 @@ function isAdmin()
 {
     session_start();
     return isset($_SESSION["admin"]) && !empty($_SESSION["admin"]);
-}
-
-function isLogin()
-{
-    session_start();
-    if (!empty($_SESSION)) {
-        if (!empty($_SESSION["admin"])) {
-            header("Location: /admin/dashboard");
-        } elseif (!empty($_SESSION["name"])) {
-            header("Location: /");
-        }
-    }
 }
 
 function current_page($path)

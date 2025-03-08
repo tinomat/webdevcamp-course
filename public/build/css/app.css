@@ -332,8 +332,10 @@ img {
   height: auto;
 }
 
-.focus {
-  scale: 1.02;
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 h1 {
@@ -605,29 +607,33 @@ h3 {
   font-size: 1.8rem;
   color: rgba(26, 27, 21, 0.8);
 }
-.form__input {
+.form__input, .form__select {
   padding: 1rem;
   border: 1px solid rgb(176.6, 199, 221.4);
   border-radius: 1rem;
   transition: 0.5s;
 }
-.form__input:focus {
+.form__input:focus, .form__select:focus {
   scale: 1.02;
 }
-.form__input--file {
+.form__input--file, .form__select--file {
   border: none;
 }
-.form__input--socials {
+.form__input--socials, .form__select--socials {
   flex: 1;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
 }
-.form__input--socials:focus {
+.form__input--socials:focus, .form__select--socials:focus {
   scale: 1;
 }
-.form__input--textarea {
+.form__input--textarea, .form__select--textarea {
   resize: none;
   overflow: auto;
+}
+.form__radio {
+  display: flex;
+  gap: 3rem;
 }
 .form__text {
   margin-top: 3rem;
@@ -690,6 +696,32 @@ h3 {
 }
 .actions--center {
   justify-content: center;
+}
+
+.hours {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(1, 1fr);
+}
+@media (min-width: 768px) {
+  .hours {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+.hours__hour {
+  color: #007df4;
+  border: 1px solid #007df4;
+  border-radius: 1rem;
+  padding: 0.5rem;
+  text-align: center;
+}
+.hours__hour:hover {
+  cursor: pointer;
 }
 
 .alert {

@@ -2,7 +2,10 @@
 
 namespace Controllers;
 
+use Model\Category;
+use Model\Day;
 use Model\Event;
+use Model\Hour;
 use MVC\Router;
 
 class EventsController
@@ -18,12 +21,18 @@ class EventsController
     }
     public static function create(Router $router)
     {
-        $event = new Event;
+        $categories = Category::all("ASC");
+        $days = Day::all("ASC");
+        $hours = Hour::all("ASC");
+
+
         $alerts = [];
         $router->render("admin/events/create", [
             "title" => "Crear un evento",
             "alerts" => $alerts,
-            "event" => $event
+            "categories" => $categories,
+            "days" => $days,
+            "hours" => $hours
         ]);
     }
 }

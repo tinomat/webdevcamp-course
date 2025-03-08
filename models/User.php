@@ -57,12 +57,27 @@ class User extends ActiveRecord
     {
         if (!$this->name) {
             self::$alerts["error"][] = "Debes ingresar un nombre";
+        } else {
+            if (strlen($this->name) > 40) {
+                self::$alerts["error"][] = "El nombre no puede exceder los 40 caracteres";
+            }
         }
         if (!$this->lastname) {
             self::$alerts["error"][] = "Debes ingresar un apellido";
+        } else {
+            if (strlen($this->lastname) > 40) {
+                self::$alerts["error"][] = "El nombre no puede exceder los 40 caracteres";
+            }
         }
         if (!$this->email) {
             self::$alerts["error"][] = "Debes ingresar un email";
+        } else {
+            if (filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
+                self::$alerts["error"][] = "Formato de email invalido";
+            }
+            if (strlen($this->email) > 40) {
+                self::$alerts["error"][] = "El email no puede exceder los 40 caracteres";
+            }
         }
         if (!$this->password) {
             self::$alerts["error"][] = "Debes ingresar una contraseña";
@@ -85,6 +100,9 @@ class User extends ActiveRecord
         } else {
             if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
                 self::$alerts["error"][] = "Formato de email no valido";
+            }
+            if (strlen($this->email) > 40) {
+                self::$alerts["error"][] = "El email no puede exceder los 40 caracteres";
             }
         }
         return self::$alerts;

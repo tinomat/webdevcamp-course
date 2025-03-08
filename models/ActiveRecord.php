@@ -150,7 +150,7 @@ class ActiveRecord
     }
 
     // Get all logs in current table
-    public static function all($order = "ASC")
+    public static function all($order = "DESC")
     {
         $query = "SELECT * FROM " . static::$table . " ORDER BY id {$order}";
         $res = self::querySQL($query);
