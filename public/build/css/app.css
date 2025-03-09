@@ -719,9 +719,24 @@ h3 {
   border-radius: 1rem;
   padding: 0.5rem;
   text-align: center;
+  transition: 0.3s;
 }
 .hours__hour:hover {
   cursor: pointer;
+}
+.hours__hour--disabled {
+  opacity: 0.5;
+  color: #64748B;
+  border-color: #64748B;
+  user-select: none;
+}
+.hours__hour--disabled:hover {
+  cursor: default;
+}
+.hours__hour--selected {
+  background: #007df4;
+  color: #FFFFFF;
+  scale: 1.02;
 }
 
 .alert {
@@ -1025,5 +1040,32 @@ h3 {
   .pagination__link--current, .pagination__link--num {
     display: block;
   }
+}
+
+.speakers-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(1, 1fr);
+  display: none;
+}
+.speakers-list--show {
+  display: grid;
+}
+.speakers-list__speaker {
+  color: #007df4;
+  border: 1px solid #007df4;
+  text-align: center;
+  padding: 1rem;
+  border-radius: 1rem;
+}
+.speakers-list__speaker:hover {
+  cursor: pointer;
+}
+.speakers-list__speaker--selected {
+  background: #007df4;
+  color: #FFFFFF;
 }
 /*# sourceMappingURL=app.css.map */

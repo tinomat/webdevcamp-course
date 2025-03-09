@@ -194,6 +194,25 @@ class ActiveRecord
         return array_shift($res);
     }
 
+    // Finds logs by array column - value
+    public static function whereArray($arr = [])
+    {
+        $query = "SELECT * FROM " . static::$table . " WHERE ";
+        foreach ($arr as $key => $value) {
+            $query .= "{$key} = '{$value}' ";
+            $query .= $key !== array_key_last($arr) ? "AND " : "";
+        }
+
+        // Removemos del query, empezando por el primer caracter, los ultimos 5 caracteres
+        // $query = substr($query, 0, -5);
+
+        // Otra forma en vez de remover caracteres podemos es hacer que cuando estemos en la ultima iteracion no agregar el and
+        // debug(array_key_last($arr)); // esta funcion retorna la ultima llave de un array, tanto si es un array asociativo o no
+
+        $res = self::querySQL($query);
+        return $res;
+    }
+
     // Get x amount of logs
     public static function numLogs()
     {

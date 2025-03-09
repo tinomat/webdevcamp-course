@@ -2,6 +2,8 @@
 
 require_once __DIR__ . "/../includes/app.php";
 
+use Controllers\ApiEvents;
+use Controllers\ApiSpeakers;
 use MVC\Router;
 use Controllers\AuthController;
 use Controllers\DashboardController;
@@ -56,6 +58,11 @@ $router->post("/admin/speakers/delete", [SpeakersController::class, "delete"]);
 $router->get("/admin/events", [EventsController::class, "index"]);
 $router->get("/admin/events/create", [EventsController::class, "create"]);
 $router->post("/admin/events/create", [EventsController::class, "create"]);
+
+// API's
+$router->get("/api/events-time", [ApiEvents::class, "index"]);
+$router->get("/api/speakers", [ApiSpeakers::class, "index"]);
+
 
 // Registered users
 $router->get("/admin/registered", [RegisteredController::class, "index"]);

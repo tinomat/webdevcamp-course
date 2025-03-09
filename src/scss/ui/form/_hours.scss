@@ -14,8 +14,23 @@
         border-radius: 1rem;
         padding: .5rem;
         text-align: center;
+        transition: .3s;
         &:hover{
             cursor: pointer;
+        }
+        &--disabled{
+            opacity: .5;
+            color: v.$gray;
+            border-color: v.$gray;
+            user-select: none;
+            &:hover{
+                cursor: default;
+            }
+        }
+        &--selected{
+            background: v.$blue;
+            color: v.$white;
+            scale: 1.02;
         }
     }
 }

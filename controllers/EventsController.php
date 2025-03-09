@@ -25,14 +25,30 @@ class EventsController
         $days = Day::all("ASC");
         $hours = Hour::all("ASC");
 
+        $event = new Event;
 
-        $alerts = [];
+        if ($_SERVER["REQUEST_METHOD"] === "POST") {
+
+            $event->sync($_POST);
+            $alerts = $event->validate();
+
+            if (empty($alerts)) {
+                $res = $event->save();
+
+                if ($res) {
+                    header("Location: /admin/events");
+                }
+            }
+        }
+
+        $alerts = Event::gAlerts();
         $router->render("admin/events/create", [
             "title" => "Crear un evento",
             "alerts" => $alerts,
             "categories" => $categories,
             "days" => $days,
-            "hours" => $hours
+            "hours" => $hours,
+            "event" => $event
         ]);
     }
 }

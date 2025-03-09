@@ -1,3 +1,26 @@
 {
-    "postman.settings.dotenv-detection-notification-visibility": false
+    "postman.settings.dotenv-detection-notification-visibility": false,
+    "editor.scrollbar.vertical": "hidden",
+    "editor.overviewRulerBorder": false,
+    "editor.hideCursorInOverviewRuler": true,
+    "editor.formatOnSave": true,
+    "editor.renderControlCharacters": false,
+    "editor.minimap.renderCharacters": false,
+    "breadcrumbs.enabled": false,
+    "editor.glyphMargin": false,
+    "workbench.statusBar.visible": false,
+    // Añadir etiquetas en los tabs
+    // "workbench.editor.customLabels.patterns": {
+    //     "**/public/**": "${dirname}/${filename}.${extname}",
+    //     "**/controllers/**": "${dirname}/${filename}.${extname}",
+    //     "**/classes/**": "${dirname}/${filename}.${extname}",
+    //     "**/models/**": "${dirname}/${filename}.${extname}",
+    //     "**/includes/**": "${dirname}/${filename}.${extname}",
+    // },
+    "editor.cursorBlinking": "expand",
+    "editor.linkedEditing": true,
+    "editor.guides.bracketPairs": true,
+    "editor.cursorSmoothCaretAnimation": "on",
+    
+    
 }
