@@ -194,6 +194,14 @@ class ActiveRecord
         return array_shift($res);
     }
 
+    // Return logs by an order
+    public static function sort($column, $order)
+    {
+        $query = "SELECT * FROM " . static::$table . " ORDER BY {$column} {$order}";
+        $res = self::querySQL($query);
+        return $res;
+    }
+
     // Finds logs by array column - value
     public static function whereArray($arr = [])
     {

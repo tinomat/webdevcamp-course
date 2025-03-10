@@ -16,6 +16,7 @@
         padding-block: 5rem;
         display: flex;
         justify-content: center;
+        align-items: center;
         gap: 2rem;
         @include m.tablet{
             justify-content: flex-end;
@@ -57,7 +58,7 @@
         }
     }
     &__button{
-        @include m.button(v.$secondary, v.$white);
+        @include m.button(v.$blue, v.$white);
         margin-block: 2rem;
         @include m.tablet{
             width: auto;

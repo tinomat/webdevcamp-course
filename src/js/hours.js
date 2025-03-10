@@ -2,11 +2,6 @@
     const hours = document.querySelector("#hours");
     if (hours) {
         // Objeto en memoria para comprobar disponibilidad del dia segun la categoria del evento
-        let search = {
-            category_id: "",
-            day: "",
-        };
-
         const category = document.querySelector("[name='category_id']");
         const days = document.querySelectorAll("[name='day']");
         const daysHidden = document.querySelector("[name='day_id']");
@@ -17,6 +12,25 @@
         days.forEach((d) => {
             d.addEventListener("input", searchTerm);
         });
+
+        let search = {
+            category_id: +category.value || "",
+            day: +daysHidden.value || "",
+        };
+
+        if (!Object.values(search).includes("")) {
+            (async () => {
+                await searchEvents();
+                // Resaltar la hora actual
+                const selectedHourId = hourHidden.value;
+                const selectedHour = document.querySelector(
+                    `[data-hour_id='${selectedHourId}']`
+                );
+                selectedHour.classList.remove("hours__hour--disabled");
+                selectedHour.classList.add("hours__hour--selected");
+                selectedHour.onclick = selectHour;
+            })();
+        }
 
         function searchTerm(e) {
             // le pasamos e.target.name para que de esta forma cuando lo usemos para poder usarlo tanto en el input de dias como de categorias de esta forma toma el atributo del name y lo asocie a la propiedad correspondiente del objeto

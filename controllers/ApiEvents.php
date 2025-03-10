@@ -8,6 +8,7 @@ use MVC\Router;
 class ApiEvents
 {
     public static function index()
+
     {
         $category_id = $_GET["category_id"] ?? "";
         $day_id = $_GET["day_id"] ?? "";

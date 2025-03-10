@@ -9,10 +9,12 @@ use Controllers\AuthController;
 use Controllers\DashboardController;
 use Controllers\EventsController;
 use Controllers\GiftsController;
+use Controllers\PagesController;
 use Controllers\RegisteredController;
 use Controllers\SpeakersController;
 
 $router = new Router();
+
 
 
 // Login
@@ -59,16 +61,27 @@ $router->get("/admin/events", [EventsController::class, "index"]);
 $router->get("/admin/events/create", [EventsController::class, "create"]);
 $router->post("/admin/events/create", [EventsController::class, "create"]);
 
+$router->get("/admin/events/edit", [EventsController::class, "edit"]);
+$router->post("/admin/events/edit", [EventsController::class, "edit"]);
+
+$router->post("/admin/events/delete", [EventsController::class, "delete"]);
+
+
 // API's
 $router->get("/api/events-time", [ApiEvents::class, "index"]);
 $router->get("/api/speakers", [ApiSpeakers::class, "index"]);
-
+$router->get("/api/speaker", [ApiSpeakers::class, "speaker"]);
 
 // Registered users
 $router->get("/admin/registered", [RegisteredController::class, "index"]);
 
-
 // Gifts
 $router->get("/admin/gifts", [GiftsController::class, "index"]);
+
+// Public area
+$router->get("/", [PagesController::class, "index"]);
+$router->get("/devwebcamp", [PagesController::class, "event"]);
+$router->get("/packages", [PagesController::class, "packages"]);
+$router->get("/workshops-conferences", [PagesController::class, "conferences"]);
 
 $router->checkRoutes();

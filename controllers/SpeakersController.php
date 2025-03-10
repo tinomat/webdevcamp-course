@@ -16,7 +16,6 @@ class SpeakersController
         if (!isAdmin()) {
             header("Location: /login");
         }
-
         // Obtener pagina actual
         $current_page = s($_GET["page"]);
 
@@ -54,6 +53,9 @@ class SpeakersController
         }
         $speaker = new Speaker;
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
+            if (!isAdmin()) {
+                header("Location: /login");
+            }
             // Leer imagen - importante tener enctype/form-data en el form para que esto funcione
             if (!empty($_FILES["image"]["tmp_name"])) {
                 $images_fold = "../public/img/speakers";
@@ -126,7 +128,9 @@ class SpeakersController
     }
     public static function edit(Router $router)
     {
-
+        if (!isAdmin()) {
+            header("Location: /login");
+        }
         $id = s($_GET["id"]);
         // Validamos que sea un entero
         $id = filter_var($id, FILTER_VALIDATE_INT);
@@ -147,11 +151,9 @@ class SpeakersController
         $networks = json_decode($speaker->networks);
 
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
-
             if (!isAdmin()) {
                 header("Location: /login");
             }
-
             // Leer imagen - importante tener enctype/form-data en el form para que esto funcione
             if (!empty($_FILES["image"]["tmp_name"])) {
                 $images_fold = "../public/img/speakers";
@@ -221,9 +223,6 @@ class SpeakersController
     }
     public static function delete()
     {
-        if (!isAdmin()) {
-            header("Location: /login");
-        }
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
             if (!isAdmin()) {
                 header("Location: /login");

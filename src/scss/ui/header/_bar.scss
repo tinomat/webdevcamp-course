@@ -16,6 +16,6 @@
     }
     &__logo{
         @include m.logo;
-        @include m.fluid-text(2rem,3rem);
+        @include m.fluid-text(3rem,4rem);
     }
 }

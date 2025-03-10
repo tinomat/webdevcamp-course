@@ -10,10 +10,15 @@
 
     &__link{
         @include m.link(v.$black);
-        padding: 2rem;
+        font-size: clamp(1.2rem, -0.8rem + 4.5vw, 1.7rem);
+        padding: 1.5rem;
         text-align: center;
         &:hover{
             background: v.$white;
+        }
+        &--current{
+            background: v.$white;
+            color: v.$black;
         }
     }
 }

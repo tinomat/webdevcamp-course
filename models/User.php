@@ -72,7 +72,7 @@ class User extends ActiveRecord
         if (!$this->email) {
             self::$alerts["error"][] = "Debes ingresar un email";
         } else {
-            if (filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
+            if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
                 self::$alerts["error"][] = "Formato de email invalido";
             }
             if (strlen($this->email) > 40) {

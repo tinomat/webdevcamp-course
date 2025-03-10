@@ -29,7 +29,7 @@
             ?>
         </main>
     </div>
-    <script src="/build/js/bundle.min.js"></script>
+    <script src="/build/js/main.min.js"></script>
 </body>
 
 </html>

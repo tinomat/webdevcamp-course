@@ -20,7 +20,8 @@
     <?= $content ?>
     <?php include_once __DIR__ . "/templates/footer.php" ?>
     <?= $script ?? "" ?>
-    <script src="/build/js/bundle.min.js" defer></script>
+
+    <script src="/build/js/main.min.js"></script>
 </body>
 
 </html>

@@ -44,11 +44,12 @@
                     <input type="radio"
                         id="<?= strtolower($day->name) ?>"
                         name="day"
-                        value="<?= $day->id ?>">
+                        value="<?= $day->id ?>"
+                        <?= $event->day_id === $day->id ? "checked" : "" ?>>
                 </div>
             <?php } ?>
         </div>
-        <input type="hidden" name="day_id" value="">
+        <input type="hidden" name="day_id" value="<?= $event->day_id ?>">
     </div>
     <div class="form__field">
         <label for="hour" class="form__label">Selecciona la hora del evento</label>
@@ -57,7 +58,7 @@
                 <li class="hours__hour hours__hour--disabled" data-hour_id="<?= $hour->id ?>"><?= $hour->hour ?></li>
             <?php } ?>
         </ul>
-        <input type="hidden" name="hour_id" value="">
+        <input type="hidden" name="hour_id" value="<?= $event->hour_id ?>">
     </div>
 </fieldset>
 
@@ -75,7 +76,7 @@
 
         <ul id="speakers-list" class="speakers-list"></ul>
 
-        <input type="hidden" name="speaker_id" value="">
+        <input type="hidden" name="speaker_id" value="<?= $event->speaker_id ?>">
     </div>
     <div class="form__field">
         <label for="available" class="form__label">Lugares disponibles</label>

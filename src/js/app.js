@@ -1,3 +1,4 @@
-function removeTildes(string) {
-    return string.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-}
+import "./hours.js";
+import "./speakers.js";
+import "./tags.js";
+import "./slider.js";

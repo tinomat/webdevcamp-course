@@ -16,10 +16,11 @@ class Pagination
         $this->total_logs = (int) $total_logs;
     }
 
-    // Calculate offset
+    // Calculate offset - registros a omitir a la hora de realizar la busqueda
     // En la pagina 1 mostraríamos registros del 1 al 10, en la 2 del 11 al 20, en la 3 del 21 al 30 y asi (esto en el caso de que solo queramos mostrar 10 registros por pagina)
     public function offset()
     {
+        // si estamos en la pagina 1, le restamos 1 para que quede 0, la cantidad de pagina por 0 nos dará 0, por lo que en la primer pagina no vamos a arrancar omitiendo ninguno registro sino que traemos desde el 0 la cantidad de registramos que hayas definido por pagina. luego en la pagina 2, traeremos x cantidad de registros siguientes desde la cantidad que ya cargamos actualmente. Es decir si trajimos 5 registros, en la siguiente traemos otros 5 pero arrancando desde el 5, osea mostramos hasta el 10, luego hasta el 15 y asi
         return $this->logs_per_page * ($this->current_page - 1);
     }
 

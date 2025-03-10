@@ -31,31 +31,45 @@ class Event extends ActiveRecord
     public function validate()
     {
         if (!$this->name) {
-            if (!$this->name) {
-                self::$alerts["error"][] = "Debes ingresar un nombre";
-            } else {
-                if (strlen($this->name) > 40) {
-                    self::$alerts["error"][] = "El nombre no puede contener más de 40 caracteres";
-                }
+            self::$alerts["error"][] = "Debes ingresar un nombre";
+        } else {
+            if (strlen($this->name) > 40) {
+                self::$alerts["error"][] = "El nombre no puede contener más de 40 caracteres";
             }
         }
         if (!$this->description) {
             self::$alerts["error"][] = "Debes ingresar una descripcion";
         }
-        if (!$this->category_id || !filter_var($this->category_id, FILTER_VALIDATE_INT)) {
+        if (!$this->category_id | !filter_var($this->category_id, FILTER_VALIDATE_INT)) {
             self::$alerts["error"][] = "Debes elegir una categoría";
         }
-        if (!$this->day_id || !filter_var($this->day_id, FILTER_VALIDATE_INT)) {
+        if (!$this->day_id) {
             self::$alerts["error"][] = "Debes elegir un día";
+        } else {
+            if (!filter_var($this->day_id, FILTER_VALIDATE_INT)) {
+                self::$alerts["error"][] = "Debes elegir un día";
+            }
         }
-        if (!$this->hour_id || !filter_var($this->hour_id, FILTER_VALIDATE_INT)) {
+        if (!$this->hour_id) {
             self::$alerts["error"][] = "Debes elegir una hora";
+        } else {
+            if (!filter_var($this->hour_id, FILTER_VALIDATE_INT)) {
+                self::$alerts["error"][] = "Debes elegir una hora";
+            }
         }
-        if (!$this->availables || !filter_var($this->availables, FILTER_VALIDATE_INT)) {
+        if (!$this->availables) {
             self::$alerts["error"][] = "Debes añadir una cantidad de lugares";
+        } else {
+            if (!filter_var($this->availables, FILTER_VALIDATE_INT)) {
+                self::$alerts["error"][] = "Debes añadir una cantidad de lugares";
+            }
         }
-        if (!$this->speaker_id || !filter_var($this->speaker_id, FILTER_VALIDATE_INT)) {
+        if (!$this->speaker_id) {
             self::$alerts["error"][] = "Debes elegir un ponente";
+        } else {
+            if (!filter_var($this->speaker_id, FILTER_VALIDATE_INT)) {
+                self::$alerts["error"][] = "Debes elegir un ponente";
+            }
         }
         return self::$alerts;
     }

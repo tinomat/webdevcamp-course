@@ -36,7 +36,7 @@
                             </a>
                             <form method="POST" action="/admin/speakers/delete" class="table__form">
                                 <input type="hidden" name="id" value="<?= $speaker->id ?>">
-                                <button class="table__action table__action-delete" type="submit">
+                                <button class="table__action table__action--delete" type="submit">
                                     <i class="fa-solid fa-circle-xmark"></i>
                                     Eliminar
                                 </button>

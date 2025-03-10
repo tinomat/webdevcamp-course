@@ -19,6 +19,9 @@ const terser = require("gulp-terser-js");
 const concat = require("gulp-concat");
 const rename = require("gulp-rename");
 
+// WebPack
+const webpack = require("webpack-stream");
+
 const paths = {
     scss: "src/scss/**/*.scss",
     js: "src/js/**/*.js",
@@ -35,8 +38,25 @@ function css() {
 
 function javascript() {
     return src(paths.js)
+        .pipe(
+            webpack({
+                // Permitimos que webpack entienda que queremos compilar un css
+                module: {
+                    rules: [
+                        {
+                            // Busca archivos de css
+                            test: /\.css$/i, // identifica archivo css
+                            use: ["style-loader", "css-loader"],
+                        },
+                    ],
+                },
+                mode: "production",
+                watch: true,
+                // Entrada, archivo de donde webpack va a leer el contenido para crear el bundle con los componentes extraidos de lo que descarguemos de internet
+                entry: "./src/js/app.js",
+            })
+        )
         .pipe(sourcemaps.init())
-        .pipe(concat("bundle.js"))
         .pipe(terser())
         .pipe(sourcemaps.write("."))
         .pipe(rename({ suffix: ".min" }))

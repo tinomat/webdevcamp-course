@@ -8,14 +8,41 @@
         const speakersList = document.getElementById("speakers-list");
 
         getSpeakers();
-
         speakersInput.addEventListener("input", searchSpeakers);
+
+        if (speakersInputHidden.value) {
+            (async () => {
+                const currentSpeakerId = speakersInputHidden.value;
+
+                const speaker = await getSpeaker(currentSpeakerId);
+                const { name, id } = speaker;
+
+                // Insertar en el DOM
+                const speakerHTML = document.createElement("LI");
+                speakerHTML.classList.add(
+                    "speakers-list__speaker",
+                    "speakers-list__speaker--selected"
+                );
+                speakerHTML.textContent = name.trim();
+                speakerHTML.dataset.speaker_id = id;
+
+                speakersList.classList.add("speakers-list--show");
+                speakersList.appendChild(speakerHTML);
+            })();
+        }
 
         async function getSpeakers() {
             const url = `${location.origin}/api/speakers`;
             const answ = await fetch(url);
             const res = await answ.json();
             resetSpeakers(res);
+        }
+
+        async function getSpeaker(id) {
+            const url = `${location.origin}/api/speaker?id=${id}`;
+            const answ = await fetch(url);
+            const res = await answ.json();
+            return res;
         }
 
         function resetSpeakers(speakersArr = []) {
@@ -30,8 +57,7 @@
 
         function searchSpeakers(e) {
             const search = e.target.value;
-
-            if (search.length > 3) {
+            if (search.length > 2) {
                 // Regex - forma de buscar un patron en un valor
                 // definimos que no importa si la busqueda está en mayusculas o minusculas, esto es util a la hora de querer filtrar busquedas
                 const regex = new RegExp(removeTildes(search), "i");
@@ -50,7 +76,6 @@
             } else {
                 // Cuando el input esté vacio limpiamos para que no se muestre ningun nombre en pantalla
                 filteredSpeakers = [];
-                speakersInputHidden.value = "";
             }
             showSpeakers();
         }
@@ -94,3 +119,7 @@
         }
     }
 })();
+
+function removeTildes(string) {
+    return string.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}

@@ -1,0 +1,91 @@
+@use "base/mixins" as m;
+@use "base/vars" as v;
+
+.schedule{
+    padding-block: 5rem;
+    @include m.container;
+}
+
+.events{
+    // Modificador para poder aplicar estilos a un elemento en base a un bloque modificado
+    $mod: &;
+    &__heading{
+        color: v.$blue;
+        margin-block: 5rem;
+        text-align: left;
+        font-size: clamp(2rem, -.8rem + 8vw ,6rem);
+    }
+    &__date{
+        color: v.$gray;
+        margin-block: 3rem 1rem;
+    }
+
+    &--workshops{
+        // Mezclamos el mod con el selector
+        #{$mod}__heading{
+            color: v.$secondary;
+        }
+        .event__information{
+            background: v.$secondary;
+            &:hover{
+                background: v.$secondary;
+            }
+        }
+    }
+
+    .swiper-button-next,
+    .swiper-button-prev{
+        color: rgba($color: v.$white, $alpha: .6)
+    }
+}
+
+
+.event{
+    &__hour{
+        font-weight: v.$bold;
+    }
+
+    &__information{
+        padding: 2rem;
+        border-radius: 1rem;
+        background: v.$blue;
+        color: v.$white;
+        transition: .3s;
+        &:hover{
+            scale: 1.02;
+            background: darken($color: v.$blue, $amount: 15%);
+        }
+
+
+    }
+    &__name{
+        font-size: 2rem;
+        margin: 0;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    &__intro{
+        font-size: 1.6rem;
+        // Cortamos el texto y agregams elipsis
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    &__info-author{
+        display: flex;
+        gap: 2rem;
+        justify-content: space-between;
+        align-items: center;
+    }
+    &__img-author{
+        width: 5.5rem;
+        background: v.$white;
+        border-radius: 50%;
+    }
+    &__name-author{
+        font-weight: v.$bold;
+    }
+}
