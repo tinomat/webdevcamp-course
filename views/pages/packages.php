@@ -5,14 +5,14 @@
     </p>
 
     <div class="packages__grid">
-        <div class="package">
+        <div data-aos=<?php aos_animations() ?> class="package">
             <h3 class="package__name">Pase gratis</h3>
             <ul class="package__list">
                 <li class="package__element">Acceso virtual a DevWebCamp</li>
             </ul>
             <p class="package__price">$0</p>
         </div>
-        <div class="package">
+        <div data-aos=<?php aos_animations() ?> class="package">
             <h3 class="package__name">Pase Presencial</h3>
             <ul class="package__list">
                 <li class="package__element">Acceso presencial a DevWebCamp</li>
@@ -24,7 +24,7 @@
             </ul>
             <p class="package__price">$199</p>
         </div>
-        <div class="package">
+        <div data-aos=<?php aos_animations() ?> class="package">
             <h3 class="package__name">Pase virtual</h3>
             <ul class="package__list">
                 <li class="package__element">Acceso virtual a DevWebCamp</li>

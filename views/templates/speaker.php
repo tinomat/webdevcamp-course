@@ -1,4 +1,4 @@
-<div class="speaker swiper-slide">
+<div data-aos=<?php aos_animations() ?> class="speaker">
     <picture>
         <!-- Cargamos formato webp en caso de que sea compatible -->
         <source srcset="<?= $_ENV["HOST"] . "/img/speakers/" . $speaker->image; ?>.webp" type="image/webp">

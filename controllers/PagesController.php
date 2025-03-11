@@ -126,4 +126,12 @@ class PagesController
             "events" => $formated_events
         ]);
     }
+
+    public static function pageNotFound(Router $router)
+    {
+
+        $router->render("pages/404", [
+            "title" => "404",
+        ]);
+    }
 }

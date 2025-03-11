@@ -31,7 +31,7 @@ class Router
         if ($fn) {
             call_user_func($fn, $this);
         } else {
-            echo "Pagina no encontrada o invalida";
+            header("Location: /404");
         }
     }
 

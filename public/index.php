@@ -84,4 +84,7 @@ $router->get("/devwebcamp", [PagesController::class, "event"]);
 $router->get("/packages", [PagesController::class, "packages"]);
 $router->get("/workshops-conferences", [PagesController::class, "conferences"]);
 
+// 404
+$router->get("/404", [PagesController::class, "pageNotFound"]);
+
 $router->checkRoutes();

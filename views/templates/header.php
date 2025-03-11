@@ -20,7 +20,7 @@
         <div class="header__content">
             <a href='/'>
                 <h1 class="header__logo">
-                    &#60;WebDevCamp/>
+                    &#60;DevWebCamp/>
                 </h1>
             </a>
 
@@ -36,7 +36,7 @@
     <div class="bar__content">
         <a href="/">
             <h2 class="bar__logo">
-                &#60;WebDevCamp/>
+                &#60;DevWebCamp/>
             </h2>
         </a>
         <nav class="navegation">
