@@ -103,22 +103,27 @@
         &:hover{
             scale: 1.05;
         }
-        &[href*='https://instagram.com']::before{
+        &[href*='facebook.com']::before{
+            // Content tiene el id del icono de font-awesome
+            content: '\f39e';
+        }
+        &[href*='github.com']::before{
+            content: '\f09b';
+        }
+        &[href*='tiktok.com']::before{
+            content: '\e07b';
+        }
+        &[href*='instagram.com']::before{
             // Content tiene el id del icono de font-awesome
             content: '\f16d';
         }
-        &[href*='https://twitter.com']::before{
-            content: '\f099';
-        }
-        &[href*='https://youtube.com']::before{
+        &[href*='youtube.com']::before{
             content: '\f167';
         }
-        &[href*='https://tiktok.com']::before{
-            content: '\e07b';
+        &[href*='twitter.com']::before{
+            content: '\f099';
         }
-        &[href*='https://github.com']::before{
-            content: '\f09b';
-        }
+        
     }
     &__hidden{
         display: none;

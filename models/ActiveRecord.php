@@ -222,9 +222,12 @@ class ActiveRecord
     }
 
     // Get x amount of logs
-    public static function numLogs()
+    public static function numLogs($column = "", $value = "")
     {
         $query = "SELECT COUNT(*) FROM " . static::$table;
+        if ($column) {
+            $query .= " WHERE {$column} = '{$value}'";
+        }
         $res = self::$db->query($query);
         $res = $res->fetch_assoc();
         return array_shift($res);

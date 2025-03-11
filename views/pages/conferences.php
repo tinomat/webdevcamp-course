@@ -9,7 +9,7 @@
         <div class="events__list slider swiper">
             <div class="swiper-wrapper">
                 <?php
-                foreach ($events["s_conferences"] as $event) {
+                foreach ($events["f_conferences"] as $event) {
                     include __DIR__ . "/../templates/event.php";
                 } ?>
             </div>

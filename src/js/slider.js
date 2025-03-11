@@ -5,10 +5,11 @@ import "swiper/css/navigation";
 document.addEventListener("DOMContentLoaded", () => {
     if (document.querySelector(".slider")) {
         const options = {
-            slidesPerView: 1,
-            spaceBetween: 20,
+            slidesPerView: 4,
+            spaceBetween: 15,
             loop: true,
             freeMode: true,
+            centeredSlides: true,
             navigation: {
                 nextEl: ".swiper-button-next",
                 prevEl: ".swiper-button-prev",
