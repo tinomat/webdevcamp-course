@@ -13,6 +13,7 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="/build/css/app.css">
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://www.paypal.com/sdk/js?client-id=AfnW-lCvcFQEC1rLu1AJ3khODZYfRfwDKGYIZ_ZKHxSL3spx69_YCCgPtXJuYqT1BQyuEwBEhRs_HYGh" data-sdk-integration-source="button-factory"></script>
     <link rel="shortcut icon" href="/build/img/favicon.webp" type="image/webp">
 </head>
 

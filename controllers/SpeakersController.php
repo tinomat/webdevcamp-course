@@ -13,7 +13,7 @@ class SpeakersController
 {
     public static function index(Router $router)
     {
-        if (!isAdmin()) {
+        if (!is_admin()) {
             header("Location: /login");
         }
         // Obtener pagina actual
@@ -48,12 +48,12 @@ class SpeakersController
     }
     public static function create(Router $router)
     {
-        if (!isAdmin()) {
+        if (!is_admin()) {
             header("Location: /login");
         }
         $speaker = new Speaker;
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
-            if (!isAdmin()) {
+            if (!is_admin()) {
                 header("Location: /login");
             }
             // Leer imagen - importante tener enctype/form-data en el form para que esto funcione
@@ -128,7 +128,7 @@ class SpeakersController
     }
     public static function edit(Router $router)
     {
-        if (!isAdmin()) {
+        if (!is_admin()) {
             header("Location: /login");
         }
         $id = s($_GET["id"]);
@@ -151,7 +151,7 @@ class SpeakersController
         $networks = json_decode($speaker->networks);
 
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
-            if (!isAdmin()) {
+            if (!is_admin()) {
                 header("Location: /login");
             }
             // Leer imagen - importante tener enctype/form-data en el form para que esto funcione
@@ -224,7 +224,7 @@ class SpeakersController
     public static function delete()
     {
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
-            if (!isAdmin()) {
+            if (!is_admin()) {
                 header("Location: /login");
             }
             $id = $_POST["id"];

@@ -8,7 +8,7 @@ class DashboardController
 {
     public static function index(Router $router)
     {
-        if (!isAdmin()) {
+        if (!is_admin()) {
             header("Location: /login");
         }
         $router->render('admin/dashboard/index', [

@@ -138,7 +138,6 @@ class ActiveRecord
 
         // consulta sql, los joins introducen por cada key o valor del array una coma para separlos, en el caso de los valores se indica la doble comilla ya que estos van entre comillas "valor", "valor"
         $query = 'INSERT INTO ' . static::$table . ' ( ' . join(', ', array_keys($attributes)) . ') VALUES ("' . join('","', array_values($attributes)) . '")';
-
         // Enviamos la consulta y almacenamos resultado
         $res = self::$db->query($query);
 

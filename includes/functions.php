@@ -1,5 +1,4 @@
 <?php
-
 function debug($var): string
 {
     echo "<pre>";
@@ -14,15 +13,20 @@ function s($html): string
     return $s;
 }
 
-function isAuth()
+function is_auth(): bool
 {
-    session_start();
-    return isset($_SESSION["name"]) && !empty($_SESSION);
+    if (!isset($_SESSION)) {
+        session_start();
+    }
+    return isset($_SESSION['name']) && !empty($_SESSION);
 }
-function isAdmin()
+
+function is_admin(): bool
 {
-    session_start();
-    return isset($_SESSION["admin"]) && !empty($_SESSION["admin"]);
+    if (!isset($_SESSION)) {
+        session_start();
+    }
+    return isset($_SESSION['admin']) && !empty($_SESSION['admin']);
 }
 
 function current_page($path)

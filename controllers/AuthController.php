@@ -2,15 +2,18 @@
 
 namespace Controllers;
 
-use Classes\Email;
 use Model\User;
 use MVC\Router;
+use Classes\Email;
+use Model\Register;
 
 class AuthController
 {
     public static function login(Router $router)
     {
-
+        if (is_auth()) {
+            header("Location: /");
+        }
         // Si se registra un metodo post en la url
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
             // Instanciamos un objeto user con los argumentos pasados en el formulario de logeo
@@ -74,8 +77,11 @@ class AuthController
 
     public static function register(Router $router)
     {
+        // Instanciar user
         $user = new User;
-
+        if (is_auth()) {
+            header("Location: /");
+        }
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $user->sync($_POST);
 

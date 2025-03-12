@@ -2,16 +2,17 @@
 
 require_once __DIR__ . "/../includes/app.php";
 
+use MVC\Router;
 use Controllers\ApiEvents;
 use Controllers\ApiSpeakers;
-use MVC\Router;
 use Controllers\AuthController;
-use Controllers\DashboardController;
-use Controllers\EventsController;
 use Controllers\GiftsController;
 use Controllers\PagesController;
-use Controllers\RegisteredController;
+use Controllers\EventsController;
+use Controllers\RegisterController;
 use Controllers\SpeakersController;
+use Controllers\DashboardController;
+use Controllers\RegisteredController;
 
 $router = new Router();
 
@@ -77,6 +78,13 @@ $router->get("/admin/registered", [RegisteredController::class, "index"]);
 
 // Gifts
 $router->get("/admin/gifts", [GiftsController::class, "index"]);
+
+// User register
+$router->get("/finish-register", [RegisterController::class, "create"]);
+$router->post("/finish-register/free", [RegisterController::class, "free"]);
+
+// Virtual ticket
+$router->get("/ticket", [RegisterController::class, "ticket"]);
 
 // Public area
 $router->get("/", [PagesController::class, "index"]);

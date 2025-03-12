@@ -14,7 +14,7 @@ class EventsController
 {
     public static function index(Router $router)
     {
-        if (!isAdmin()) {
+        if (!is_admin()) {
             header("Location: /login");
         }
 
@@ -51,7 +51,7 @@ class EventsController
     }
     public static function create(Router $router)
     {
-        if (!isAdmin()) {
+        if (!is_admin()) {
             header("Location: /login");
         }
         $categories = Category::all("ASC");
@@ -61,7 +61,7 @@ class EventsController
         $event = new Event;
 
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
-            if (!isAdmin()) {
+            if (!is_admin()) {
                 header("Location: /login");
             }
 
@@ -89,7 +89,7 @@ class EventsController
 
     public static function edit(Router $router)
     {
-        if (!isAdmin()) {
+        if (!is_admin()) {
             header("Location: /login");
         }
         $categories = Category::all("ASC");
@@ -106,7 +106,7 @@ class EventsController
         }
 
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
-            if (!isAdmin()) {
+            if (!is_admin()) {
                 header("Location: /login");
             }
 
@@ -135,7 +135,7 @@ class EventsController
     public static function delete()
     {
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
-            if (!isAdmin()) {
+            if (!is_admin()) {
                 header("Location: /login");
             }
             $id = $_POST["id"];

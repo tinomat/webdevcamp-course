@@ -1,0 +1,25 @@
+<?php
+
+namespace Model;
+
+class Register extends ActiveRecord
+{
+    protected static $table = "registers";
+    protected static $columnsDB = ["id", "package_id", "pay_id", "token", "user_id"];
+
+    public $id;
+    public $package_id;
+    public $pay_id;
+    public $token;
+    public $user_id;
+
+
+    public function __construct($args = [])
+    {
+        $this->id = $args["id"] ?? null;
+        $this->package_id = $args["package_id"] ?? "";
+        $this->pay_id = $args["pay_id"] ?? "";
+        $this->token = $args["token"] ?? "";
+        $this->user_id = $args["user_id"] ?? "";
+    }
+}

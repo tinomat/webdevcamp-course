@@ -12,6 +12,7 @@
             align-items: start;
         }
     }
+    
 }
 
 .package{
@@ -31,5 +32,9 @@
         margin: 3rem 0;
         color: v.$blue;
         font-weight: v.$extraBold;
+    }
+    &__submit{
+        @include m.button(v.$blue, v.$white);
+        margin-top: 3rem;
     }
 }
