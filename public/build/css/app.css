@@ -958,7 +958,6 @@ h3 {
 }
 .event__information:hover {
   scale: 1.02;
-  background: rgb(0, 85.8094262295, 167.5);
 }
 .event__name {
   font-size: 2rem;
@@ -988,6 +987,28 @@ h3 {
 }
 .event__name-author {
   font-weight: 700;
+}
+.event__add {
+  background: #FFFFFF;
+  padding: 1.5rem 3rem;
+  color: #1a1b15;
+  font-size: 1.8rem;
+  font-weight: 700;
+  border: none;
+  transition: 0.3s;
+  text-align: center;
+  width: 100%;
+  display: inline-block;
+  margin-top: 1rem;
+}
+.event__add:hover {
+  background: #cccccc;
+  cursor: pointer;
+  scale: 1.02;
+}
+.event__add:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .resume {
@@ -1605,5 +1626,95 @@ h3 {
 .speakers-list__speaker--selected {
   background: #007df4;
   color: #FFFFFF;
+}
+
+.register-events {
+  width: min(95%, 120rem);
+  margin: 0 auto;
+}
+@media (min-width: 768px) {
+  .register-events {
+    display: flex;
+    align-items: flex-start;
+    gap: 4rem;
+  }
+}
+@media (min-width: 768px) {
+  .register-events__list {
+    flex-basis: 60%;
+  }
+}
+.register-events__grid {
+  display: grid;
+  gap: 3rem;
+  grid-template-columns: repeat(1, 1fr);
+}
+@media (min-width: 768px) {
+  .register-events__grid {
+    display: grid;
+    gap: 3rem;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+.register-events__heading--conferences, .register-events__heading--workshops {
+  white-space: no-wrap;
+  font-size: clamp(1.5rem, -0.8rem + 10vw, 6rem);
+}
+.register-events__heading--conferences {
+  color: #007df4;
+}
+.register-events__heading--workshops {
+  color: #00c8c2;
+}
+.register-events .event__information:hover {
+  scale: 1;
+}
+.register-events__date {
+  margin: 6rem 0 3rem 0;
+}
+
+.register {
+  background: #F8FAFC;
+  padding: 3rem;
+  border-radius: 1rem;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+@media (min-width: 768px) {
+  .register {
+    flex-basis: 40%;
+    position: sticky;
+    top: 3rem;
+  }
+}
+.register__heading {
+  margin: 0 0 3rem 0;
+  gap: 2rem;
+}
+.register__event {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+.register__event:nth-child(even) {
+  background: rgb(237.29, 242.35, 247.41);
+}
+.register__name {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0;
+}
+.register__delete {
+  all: unset;
+  color: rgb(169, 0, 0);
+}
+.register__delete:hover {
+  cursor: pointer;
+}
+.register__msg {
+  text-align: center;
+  font-weight: 700;
+  margin-bottom: 0;
 }
 /*# sourceMappingURL=app.css.map */

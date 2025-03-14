@@ -2,10 +2,15 @@
 
 namespace Controllers;
 
-use Model\Package;
-use Model\Register;
+use Model\Day;
+use Model\Hour;
 use Model\User;
 use MVC\Router;
+use Model\Event;
+use Model\Package;
+use Model\Speaker;
+use Model\Category;
+use Model\Register;
 
 class RegisterController
 {
@@ -92,6 +97,103 @@ class RegisterController
         $router->render("register/ticket", [
             "title" => "Asistencia a DevWebCamp",
             "register" => $register
+        ]);
+    }
+    public static function pay()
+    {
+        if ($_SERVER["REQUEST_METHOD"]) {
+            if (!is_auth()) {
+                header("Location: /login");
+            }
+
+            // Validar que $_POST no venga vacio
+            if (empty($_POST)) {
+                // Retornamos json vacío
+                echo json_encode([]);
+                return;
+            }
+
+            // Crear el registro
+
+
+            // Aplicamos tryCath en caso de algun error, recomendado sobre todo para pagos
+            try {
+                // Creamos los datos del registro
+                $data = $_POST;
+                $token = substr(md5(uniqid(rand(), true)), 0, 8);
+                $data["token"] = $token;
+                $data["user_id"] = $_SESSION["id"];
+                // Instanciamos registro
+                $register = new Register($data);
+
+                $res = $register->save();
+                // Retornamos al frontend (js)
+                echo json_encode($res);
+            } catch (\Throwable $th) {
+                echo json_encode([
+                    "res" => $th
+                ]);
+            }
+        }
+    }
+    public static function conferences(Router $router)
+    {
+        if (!is_auth()) {
+            header("Location:/login");
+        }
+
+        // Validar compra del plan presencial
+        $user_id = (int)$_SESSION["id"];
+
+        // Usuario registrado
+        $register = Register::where("user_id", $user_id);
+
+        // Si el usuario tiene el paquete presencial registrado
+        if ($register->package_id !== "1" || !$register->pay_id) {
+            header("Location:/login");
+        }
+
+        // Traemos los eventos ordenados por su hora, desde mas temprano a mas tarde
+        $events = Event::sort("hour_id", "ASC");
+
+        $formated_events = [];
+
+        // Creamos referencias
+        $days = [
+            // Si day_id es uno y category_id uno, la propiedad del array será f_conferences osea las conferencias del viernes
+            // Si category_id es dos serán los workshops del viernes
+            1 => [
+                1 => 'f_conferences',
+                2 => 'f_workshops',
+            ],
+            // Si el day_id es 2 es decir el sabado, y la category_id es 1 la key del array serán las conferencias del sabado
+            // si category_id es serán los workshops del sabado
+            2 => [
+                1 => 's_conferences',
+                2 => 's_workshops',
+            ],
+        ];
+
+        $formated_events = [];
+
+        foreach ($events as $event) {
+            // Craemos claves temporales para almacenar los objetos, obteniendolos por su id
+            $event->category = Category::find($event->category_id);
+            $event->day = Day::find($event->day_id);
+            $event->hour = Hour::find($event->hour_id);
+            $event->speaker = Speaker::find($event->speaker_id);
+
+            $day_id = $event->day_id;
+            $category_id = $event->category_id;
+            if (isset($days[$day_id][$category_id])) {
+                $key = $days[$day_id][$category_id];
+                $formated_events[$key][] = $event;
+            }
+        }
+
+        $router->render("register/conferences", [
+            "title" => "Elige WorkShops y Conferencias",
+            "events" => $formated_events
         ]);
     }
 }

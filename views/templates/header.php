@@ -23,11 +23,7 @@
 
             <p class="header__text">Octubre 5-6 - 2023</p>
             <p class="header__text header__text--modality">En linea - Presencial</p>
-
-
-            <?php if (empty($_SESSION)) { ?>
-                <a href='/register' class="header__button">Comprar pase</a>
-            <?php } ?>
+            <a href=<?= empty($_SESSION) ? "/register" : "/finish-register"  ?> class="header__button">Comprar pase</a>
 
         </div>
     </div>

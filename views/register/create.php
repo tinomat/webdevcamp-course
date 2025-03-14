@@ -24,8 +24,11 @@
                 <li class="package__element">Comida y bebida</li>
             </ul>
             <p class="package__price">$199</p>
-            <div id="paypal-container-T398V3B7MLX22"></div>
-
+            <div id="smart-button-container">
+                <div style="text-align: center;">
+                    <div id="paypal-button-container"></div>
+                </div>
+            </div>
         </div>
         <div class="package">
             <h3 class="package__name">Pase virtual</h3>
@@ -40,9 +43,65 @@
     </div>
 </main>
 
-<script src="https://www.paypal.com/sdk/js?client-id=BAAzZV3Cs_EGULXONMmy-zBKydhKkValTdlB62P8FWrV4rBakaAJH8ZLtSuVPWydzLMiUT1BfE15GwZbb0&components=hosted-buttons&disable-funding=venmo&currency=USD"></script>
+<!-- Reemplazar CLIENT_ID por tu client id proporcionado al crear la app desde el developer dashboard) -->
+<script src="https://www.paypal.com/sdk/js?client-id=AR8Hcskm7bw6OMMkT4jaf_8B8oi3Tx1Fc6Zv1ZIg0BL4pVvVZCcCxKhYxDcdP-V_gsCpPip0bYvs5LuM&enable-funding=venmo&currency=USD" data-sdk-integration-source="button-factory"></script>
+
 <script>
-    paypal.HostedButtons({
-        hostedButtonId: "T398V3B7MLX22",
-    }).render("#paypal-container-T398V3B7MLX22")
+    function initPayPalButton() {
+        paypal.Buttons({
+            style: {
+                shape: 'sharp',
+                color: 'blue',
+                layout: 'horizontal',
+                label: 'pay',
+                tagline: false,
+            },
+
+            createOrder: function(data, actions) {
+                return actions.order.create({
+                    purchase_units: [{
+                        "description": "1",
+                        "amount": {
+                            "currency_code": "USD",
+                            "value": 199
+                        }
+                    }]
+                });
+            },
+
+            onApprove: function(data, actions) {
+                return actions.order.capture().then(function(orderData) {
+
+                    // Almacenar el id del pago
+                    const data = new FormData();
+                    // Id del packete en el json con la informacion
+                    data.append("package_id", orderData.purchase_units[0].description);
+                    // Id del pago
+                    data.append("pay_id", orderData.purchase_units[0].payments.captures[0].id);
+
+                    // Mandamos la informacion al endpoint
+                    fetch("/finish-register/pay", {
+                            // Configuramos metodo post
+                            method: "POST",
+                            // Pasamos el form data
+                            body: data
+                        })
+                        // Trabajamos con then porque es una promesa
+                        .then(answ => answ.json()) // convertimos a json
+                        .then(res => { // imprimimos la respuesta
+                            if (res.res) {
+                                actions.redirect(location.origin + "/finish-register/conferences");
+                            }
+                        })
+
+                });
+            },
+
+            onError: function(err) {
+                console.log(err);
+            }
+        }).render('#paypal-button-container');
+    }
+
+    initPayPalButton();
 </script>

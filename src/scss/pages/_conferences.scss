@@ -37,6 +37,7 @@
     .swiper-button-prev{
         color: rgba($color: v.$white, $alpha: .6)
     }
+    
 }
 
 
@@ -53,7 +54,6 @@
         transition: .3s;
         &:hover{
             scale: 1.02;
-            background: darken($color: v.$blue, $amount: 15%);
         }
 
 
@@ -87,5 +87,13 @@
     }
     &__name-author{
         font-weight: v.$bold;
+    }
+    &__add{
+        @include m.button(v.$white, v.$black);
+        margin-top: 1rem;
+        &:disabled{
+            opacity: .5;
+            cursor: not-allowed;
+        }
     }
 }

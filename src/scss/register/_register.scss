@@ -1,0 +1,89 @@
+@use "base/vars" as v;
+@use "base/mixins" as m;
+
+.register-events{
+    @include m.container;
+    @include m.tablet{
+        display: flex;
+        align-items: flex-start;
+        gap: 4rem;
+    }
+    &__list{
+        @include m.tablet{
+            flex-basis: 60%;
+        }
+    }
+    &__grid{
+        @include m.grid(1,3rem);
+        @include m.tablet{
+            @include m.grid(2,3rem)
+        }
+    }
+    &__heading{
+        &--conferences,
+        &--workshops{
+            white-space: no-wrap;
+            @include m.fluid-text(1.5rem,6rem);
+        }
+        &--conferences{
+            color: v.$blue;
+        }
+        &--workshops{
+            color: v.$secondary;
+        }
+    }
+    .event{
+        &__information{
+            &:hover{
+                scale: 1;
+            }
+        }
+    }
+    &__date{
+        margin: 6rem 0 3rem 0;
+    }
+}
+
+.register{
+    background: v.$light-gray;
+    padding: 3rem;
+    border-radius: 1rem;
+    @include m.box-shadow;
+    @include m.tablet{
+        flex-basis: 40%;
+        position: sticky;
+        top: 3rem;
+    }
+    &__heading{
+        margin: 0 0 3rem 0;
+        gap: 2rem;
+    }
+    &__event{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem;
+        border-radius: .5rem;
+        &:nth-child(even){
+            background: darken($color: v.$light-gray, $amount: 3);
+        }
+    }
+    &__name{
+        font-size: 2rem;
+        font-weight: v.$bold;
+        margin: 0;
+    }
+    &__delete{
+        all: unset;
+        color: v.$red;
+        &:hover{
+            cursor: pointer;
+        }
+    }
+    &__msg{
+        text-align: center;
+        font-weight: v.$bold;
+        margin-bottom: 0;
+    }
+    
+}

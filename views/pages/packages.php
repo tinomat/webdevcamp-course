@@ -23,6 +23,7 @@
                 <li class="package__element">Comida y bebida</li>
             </ul>
             <p class="package__price">$199</p>
+
         </div>
         <div data-aos=<?php aos_animations() ?> class="package">
             <h3 class="package__name">Pase virtual</h3>

@@ -83,7 +83,6 @@ class PagesController
     }
     public static function conferences(Router $router)
     {
-
         // Obtenemos los eventos ordenados por su hora de forma ascendente
         $events = Event::sort("hour_id", "ASC");
         $formated_events = [];
