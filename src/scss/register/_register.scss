@@ -67,6 +67,9 @@
         &:nth-child(even){
             background: darken($color: v.$light-gray, $amount: 3);
         }
+        &:last-of-type{
+            border-bottom: 1px solid v.$black;
+        }
     }
     &__name{
         font-size: 2rem;
@@ -84,6 +87,27 @@
         text-align: center;
         font-weight: v.$bold;
         margin-bottom: 0;
+        color: v.$red;
+    }
+    &__text{
+        text-align: center;
+    }
+    &__gift{
+        margin-top: 3rem;
+    }
+    &__label{
+        display: block;
+        font-size: 2.2rem;
+        font-weight: v.$bold;
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+    &__select{
+        width: 100%;
+        background: v.$white;
+        border: 1px solid v.$gray;
+        border-radius: .5rem;
+        padding: 1rem;
     }
     
 }

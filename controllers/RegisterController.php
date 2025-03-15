@@ -10,6 +10,8 @@ use Model\Event;
 use Model\Package;
 use Model\Speaker;
 use Model\Category;
+use Model\EventsRegister;
+use Model\Gift;
 use Model\Register;
 
 class RegisterController
@@ -24,9 +26,16 @@ class RegisterController
         // Verificar si el ususario ya está registrado (eligio un plan)
         $register = Register::where("user_id", $_SESSION["id"]);
 
-        // Si existe un registro y este es del plan gratis redireccionamos a su boleto
-        if (isset($register) && $register->package_id === "3") {
+        // Si existe un registro y este es del plan gratis o virtual, redireccionamos a su ticket correspondiente
+        if (isset($register) && ($register->package_id === "3" || $register->package_id === "2")) {
             header("Location: /ticket?id=" . urlencode($register->token));
+            return;
+        }
+
+        // Si existe un registro y el paquete registrado es el presencial
+        if (isset($register) && $register->package_id === "1") {
+            header("Location:/finish-register/conferences");
+            return;
         }
 
         $router->render("register/create", [
@@ -114,8 +123,6 @@ class RegisterController
             }
 
             // Crear el registro
-
-
             // Aplicamos tryCath en caso de algun error, recomendado sobre todo para pagos
             try {
                 // Creamos los datos del registro
@@ -140,6 +147,7 @@ class RegisterController
     {
         if (!is_auth()) {
             header("Location:/login");
+            return;
         }
 
         // Validar compra del plan presencial
@@ -148,9 +156,22 @@ class RegisterController
         // Usuario registrado
         $register = Register::where("user_id", $user_id);
 
-        // Si el usuario tiene el paquete presencial registrado
+        if (isset($register) && $register->package_id !== "1") {
+            header("Location: /ticket?id=" . urlencode($register->token));
+            return;
+        }
+
+        // Paquete presencial
+        // Si el usuario no tiene el paquete presencial o no tiene registrado un pago
         if ($register->package_id !== "1" || !$register->pay_id) {
-            header("Location:/login");
+            header("Location:/finish-register");
+            return;
+        }
+
+        $event_register = EventsRegister::where("register_id", $register->id);
+        if (!empty($event_register)) {
+            header("Location: /ticket?id=" . urlencode($register->token));
+            return;
         }
 
         // Traemos los eventos ordenados por su hora, desde mas temprano a mas tarde
@@ -190,10 +211,92 @@ class RegisterController
                 $formated_events[$key][] = $event;
             }
         }
+        $gifts = Gift::all("ASC");
+
+        // Manejar el POST
+        if ($_SERVER["REQUEST_METHOD"] === "POST") {
+            // Validar auth
+            if (!is_auth()) {
+                header("Location: /login");
+                return;
+            }
+
+            $events = explode(",", $_POST["events"]);
+
+            // En caso de que el arreglo de eventos llegue vacío
+            if (empty($events)) {
+                echo json_encode(["res" => false]);
+                return;
+            }
+
+            // Registro del usuario
+            $register = Register::where("user_id", $_SESSION["id"]);
+
+            // Si no encontró un registro o no tiene el paquete presencial comprado
+            if (!isset($register) || $register->package_id !== "1") {
+                echo json_encode(["res" => false]);
+                return;
+            }
+
+            // Para no realizar dos consultas iguales creamos un array para almacenar los eventos ya filtrados
+            $events_arr = [];
+
+            // Validar la disponibilidad de los eventos
+            foreach ($events as $event_id) { // events contiene los id de los eventos
+                $event = Event::find($event_id);
+
+                // Check que el evento exista y que tenga lugares disponibles
+                if (!isset($event) || $event->availables === "0") {
+                    echo json_encode(["res" => false]);
+                    return;
+                }
+
+                // Llenamos el array con los eventos que pasen la validacion
+                $events_arr[] = $event;
+            }
+
+            // Substraemos los lugares disponibles de los eventos elegidos y guardamos el registro
+            // Aca vamos a trabajar con el array ya formateado de los arrays con disponibilidad y existentes
+            foreach ($events_arr as $event) {
+                // Restamos en uno la cantidad de lugares disponibles para cada evento seleccionado por el usuario
+                $event->availables -= 1;
+                // Como cada evento va a ser un objeto con el modelo de evento, usamos save para guardar los cambios en cada uno
+                $event->save();
+
+                // Almacenar el registro
+                $data = [
+                    "event_id" => (int) $event->id,
+                    "register_id" => (int) $register->id
+                ];
+                // Creamos la instancia de eventos registros
+                $register_user = new EventsRegister($data);
+                $register_user->save();
+            }
+            // Almacenar regalo
+            // Sincronizamos el campo de regalo id, con el regalo id que mandamos en post
+            $register->sync(["gift_id" => $_POST["gift_id"]]);
+            $res = $register->save(); // almacenamos
+
+            // En caso de que se almacene el registro y todo haya salido bien
+            if ($res) {
+                echo json_encode(
+                    [
+                        "res" => $res,
+                        "token" => $register->token
+                    ]
+                );
+            } else {
+                echo json_encode(["res" => false]);
+            }
+            // Para no renderizar la vista
+            return;
+        }
+
 
         $router->render("register/conferences", [
             "title" => "Elige WorkShops y Conferencias",
-            "events" => $formated_events
+            "events" => $formated_events,
+            "gifts" => $gifts
         ]);
     }
 }

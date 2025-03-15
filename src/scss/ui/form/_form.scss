@@ -90,7 +90,8 @@
         @include m.button(v.$blue,v.$white);
         width: auto;
         align-self: flex-end;
-        &--register{
+        &--register,
+        &--full{
             width: 100%;
         }
     }

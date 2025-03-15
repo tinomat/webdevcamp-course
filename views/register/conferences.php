@@ -42,5 +42,23 @@
         <h2 class="register__heading">Tu Registro</h2>
         <!-- Se llena con js -->
         <div id="register-resume" class="register__resume"></div>
+
+        <div class="register__gift">
+            <label for="gift" class="register__label">Selecciona un regalo</label>
+            <select id="gift" class="register__select">
+                <option value="" selected disabled>- Selecciona tu regalo</option>
+                <?php
+                foreach ($gifts as $gift) { ?>
+                    <option value="<?= $gift->id ?>"><?= $gift->name ?></option>
+                <?php }
+                ?>
+            </select>
+        </div>
+
+        <form id="register" class="form">
+            <div class="form__field">
+                <input type="submit" class="form__submit form__submit--full" value="Registrarme">
+            </div>
+        </form>
     </aside>
 </div>

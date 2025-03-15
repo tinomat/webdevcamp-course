@@ -21,7 +21,7 @@
             data-id="<?= $event->id ?>"
             class="event__add"
             <?= ($event->availables == 0) ? "disabled" : ""; ?>>
-            <?= $event->availables > 1 ? "Agregar - " . $event->availables . " Disponibles" : "Agotado" ?>
+            <?= $event->availables > 0 ? "Agregar - " . $event->availables . " Disponibles" : "Agotado" ?>
         </button>
     </div>
 </div>

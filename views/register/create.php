@@ -1,4 +1,4 @@
-<main class="register">
+<main class="register--pay">
     <h2 class="register__heading"><?= $title ?></h2>
     <p class="register__description">Elige tu plan</p>
 
@@ -26,7 +26,7 @@
             <p class="package__price">$199</p>
             <div id="smart-button-container">
                 <div style="text-align: center;">
-                    <div id="paypal-button-container"></div>
+                    <div id="paypal-button-container-presencial"></div>
                 </div>
             </div>
         </div>
@@ -39,13 +39,17 @@
                 <li class="package__element">Acceso a las grabaciones</li>
             </ul>
             <p class="package__price">$49</p>
+            <div id="smart-button-container">
+                <div style="text-align: center;">
+                    <div id="paypal-button-container-virtual"></div>
+                </div>
+            </div>
         </div>
     </div>
 </main>
 
-<!-- Reemplazar CLIENT_ID por tu client id proporcionado al crear la app desde el developer dashboard) -->
-<script src="https://www.paypal.com/sdk/js?client-id=AR8Hcskm7bw6OMMkT4jaf_8B8oi3Tx1Fc6Zv1ZIg0BL4pVvVZCcCxKhYxDcdP-V_gsCpPip0bYvs5LuM&enable-funding=venmo&currency=USD" data-sdk-integration-source="button-factory"></script>
 
+<script src="https://www.paypal.com/sdk/js?client-id=AR8Hcskm7bw6OMMkT4jaf_8B8oi3Tx1Fc6Zv1ZIg0BL4pVvVZCcCxKhYxDcdP-V_gsCpPip0bYvs5LuM&enable-funding=venmo&currency=USD" data-sdk-integration-source="button-factory"></script>
 <script>
     function initPayPalButton() {
         paypal.Buttons({
@@ -64,6 +68,61 @@
                         "amount": {
                             "currency_code": "USD",
                             "value": 199
+                        }
+                    }]
+                });
+            },
+
+            onApprove: function(data, actions) {
+                return actions.order.capture().then(function(orderData) {
+                    // Almacenar el id del pago
+                    const data = new FormData();
+                    // Id del packete en el json con la informacion
+                    data.append("package_id", orderData.purchase_units[0].description);
+                    // Id del pago
+                    data.append("pay_id", orderData.purchase_units[0].payments.captures[0].id);
+
+                    // Mandamos la informacion al endpoint
+                    fetch("/finish-register/pay", {
+                            // Configuramos metodo post
+                            method: "POST",
+                            // Pasamos el form data
+                            body: data
+                        })
+                        // Trabajamos con then porque es una promesa
+                        .then(answ => answ.json()) // convertimos a json
+                        .then(res => { // imprimimos la respuesta
+                            if (res.res) {
+                                location.href = "/finish-register/conferences"
+                            }
+                        })
+
+                });
+            },
+
+            onError: function(err) {
+                console.log(err);
+            }
+        }).render('#paypal-button-container-presencial');
+
+
+        // Pase virtual
+        paypal.Buttons({
+            style: {
+                shape: 'sharp',
+                color: 'blue',
+                layout: 'horizontal',
+                label: 'pay',
+                tagline: false,
+            },
+
+            createOrder: function(data, actions) {
+                return actions.order.create({
+                    purchase_units: [{
+                        "description": "2",
+                        "amount": {
+                            "currency_code": "USD",
+                            "value": 49
                         }
                     }]
                 });
@@ -90,7 +149,7 @@
                         .then(answ => answ.json()) // convertimos a json
                         .then(res => { // imprimimos la respuesta
                             if (res.res) {
-                                actions.redirect(location.origin + "/finish-register/conferences");
+                                location.href = "/finish-register/conferences"
                             }
                         })
 
@@ -100,7 +159,7 @@
             onError: function(err) {
                 console.log(err);
             }
-        }).render('#paypal-button-container');
+        }).render('#paypal-button-container-virtual');
     }
 
     initPayPalButton();

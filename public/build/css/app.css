@@ -338,6 +338,18 @@ input[type=number]::-webkit-outer-spin-button {
   margin: 0;
 }
 
+.swal2-popup {
+  font-size: 1.8rem !important;
+}
+.swal2-popup .swal2-confirm {
+  background: #007df4 !important;
+  transition: 0.3s;
+}
+.swal2-popup .swal2-confirm:hover {
+  scale: 1.01;
+  background: rgb(0, 72.7459016393, 142) !important;
+}
+
 h1 {
   font-size: 4rem;
 }
@@ -699,7 +711,7 @@ h3 {
   cursor: pointer;
   scale: 1.02;
 }
-.form__submit--register {
+.form__submit--register, .form__submit--full {
   width: 100%;
 }
 
@@ -1700,6 +1712,9 @@ h3 {
 .register__event:nth-child(even) {
   background: rgb(237.29, 242.35, 247.41);
 }
+.register__event:last-of-type {
+  border-bottom: 1px solid #1a1b15;
+}
 .register__name {
   font-size: 2rem;
   font-weight: 700;
@@ -1716,5 +1731,26 @@ h3 {
   text-align: center;
   font-weight: 700;
   margin-bottom: 0;
+  color: rgb(169, 0, 0);
+}
+.register__text {
+  text-align: center;
+}
+.register__gift {
+  margin-top: 3rem;
+}
+.register__label {
+  display: block;
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+.register__select {
+  width: 100%;
+  background: #FFFFFF;
+  border: 1px solid #64748B;
+  border-radius: 0.5rem;
+  padding: 1rem;
 }
 /*# sourceMappingURL=app.css.map */

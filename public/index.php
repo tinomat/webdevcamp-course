@@ -84,6 +84,7 @@ $router->get("/finish-register", [RegisterController::class, "create"]);
 $router->post("/finish-register/free", [RegisterController::class, "free"]);
 $router->post("/finish-register/pay", [RegisterController::class, "pay"]);
 $router->get("/finish-register/conferences", [RegisterController::class, "conferences"]);
+$router->post("/finish-register/conferences", [RegisterController::class, "conferences"]);
 
 // Virtual ticket
 $router->get("/ticket", [RegisterController::class, "ticket"]);
