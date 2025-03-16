@@ -3,13 +3,16 @@
 namespace Controllers;
 
 use Model\EventTime;
-use MVC\Router;
 
 class ApiEvents
 {
     public static function index()
 
     {
+        if (!is_admin()) {
+            echo json_encode("no chusmees");
+            return;
+        }
         $category_id = $_GET["category_id"] ?? "";
         $day_id = $_GET["day_id"] ?? "";
 
