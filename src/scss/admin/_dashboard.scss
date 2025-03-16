@@ -4,6 +4,8 @@
 .dashboard{
     height: 100%;
     display: flex;
+    @include m.tablet{
+    }
     flex-direction: column;
     background: v.$light-gray;
     &__header{
@@ -99,6 +101,9 @@
     }
     &__form{
         @extend .dashboard__container;
+        @include m.md-container;
+    }
+    &__graphic{
         @include m.md-container;
     }
 }

@@ -180,3 +180,7 @@
         margin: 2rem 0;
     }
 }
+
+@mixin bg-gradient($bgColor){
+    background: linear-gradient(to left top, $bgColor, lighten($bgColor, 8%));
+}

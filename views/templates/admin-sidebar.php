@@ -1,4 +1,5 @@
 <aside class="dashboard__sidebar">
+
     <nav class="dashboard__menu">
         <a href='/admin/dashboard' class="dashboard__link <?= current_page('/dashboard') ? 'dashboard__link--current' : '' ?>">
             <i class="fa-solid fa-house dashboard__icon"></i>

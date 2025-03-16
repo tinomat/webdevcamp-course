@@ -171,7 +171,7 @@ class ActiveRecord
     // Get so many logs as limit indicate
     public static function get($limit, $order = "DESC")
     {
-        $query = "SELECT * FROM " . static::$table . " LIMIT {$limit} ORDER BY id {$order}";
+        $query = "SELECT * FROM " . static::$table . " ORDER BY id {$order} LIMIT {$limit} ";
         $res = self::querySQL($query);
         return $res;
     }
@@ -197,6 +197,14 @@ class ActiveRecord
     public static function sort($column, $order)
     {
         $query = "SELECT * FROM " . static::$table . " ORDER BY {$column} {$order}";
+        $res = self::querySQL($query);
+        return $res;
+    }
+
+    // Return logs by an order and a limit
+    public static function sortLimit($column, $order, $limit)
+    {
+        $query = "SELECT * FROM " . static::$table . " ORDER BY {$column} {$order} LIMIT {$limit}";
         $res = self::querySQL($query);
         return $res;
     }
@@ -231,6 +239,21 @@ class ActiveRecord
         $res = $res->fetch_assoc();
         return array_shift($res);
     }
+
+    // Total of logs with Array Where
+    public static function totalArray($arr = [])
+    {
+        $query = "SELECT COUNT(*) FROM " . static::$table . " WHERE ";
+        foreach ($arr as $key => $value) {
+            $query .= "{$key} = '{$value}' ";
+            $query .= $key !== array_key_last($arr) ? "AND " : "";
+        }
+        $res = self::$db->query($query);
+        $res = $res->fetch_assoc();
+        return array_shift($res);
+    }
+
+
 
     // Update a log
     public function update()

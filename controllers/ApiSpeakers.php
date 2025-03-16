@@ -8,8 +8,13 @@ class ApiSpeakers
 {
     public static function index()
     {
+        if (!is_admin()) {
+            echo json_encode("no chusmees");
+            return;
+        }
         $speakers = Speaker::all();
         echo json_encode($speakers);
+        return;
     }
     public static function speaker()
     {
